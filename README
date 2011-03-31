@@ -1,1 +1,19 @@
-readme
+http://help.github.com/linux-set-up-git/
+$ cd ~/.ssh
+$ mkdir key_backup
+$ cp id_rsa* key_backup
+$ rm id_rsa*
+$ ssh-keygen -t rsa -C "your_email@youremail.com" 
+
+Get a local copy
+$ git clone git@github.com:kongxx/garbagecan.git
+
+Commit to local
+$ git commit -m '' README
+
+Push to github
+$ git push
+
+Update the local
+$ git pull
+
