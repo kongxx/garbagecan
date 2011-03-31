@@ -4,12 +4,13 @@ $ mkdir key_backup
 $ cp id_rsa* key_backup
 $ rm id_rsa*
 $ ssh-keygen -t rsa -C "your_email@youremail.com" 
+* Update the github public key
 
 Get a local copy
 $ git clone git@github.com:kongxx/garbagecan.git
 
 Commit to local
-$ git commit -m '' README
+$ git commit -m 'xxx' <file>
 
 Push to github
 $ git push
