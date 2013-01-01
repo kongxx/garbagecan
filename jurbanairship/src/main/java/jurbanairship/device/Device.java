@@ -3,7 +3,7 @@ package jurbanairship.device;
 import java.util.Date;
 import java.util.List;
 
-public class Device {
+public abstract class Device {
 
 	protected String id;
 	protected String alias;
