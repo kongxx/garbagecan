@@ -1,5 +1,6 @@
 package jurbanairship.device;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +8,8 @@ public abstract class Device {
 
 	protected String id;
 	protected String alias;
-	protected List<String> tags;
-	protected boolean active;
+	protected List<String> tags = new ArrayList<String>();
+	protected boolean active = true;
 	protected Date registerTime;
 
 	public String getId() {
@@ -51,4 +52,5 @@ public abstract class Device {
 		this.registerTime = registerTime;
 	}
 
+	public abstract String getRegisterAPIPath();
 }
