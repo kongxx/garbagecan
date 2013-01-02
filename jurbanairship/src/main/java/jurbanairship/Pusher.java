@@ -18,13 +18,26 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 public class Pusher {
 
 	private static final Logger logger = LoggerFactory.getLogger(Pusher.class);
 
 	private static final String PUSH_API = "https://go.urbanairship.com/api/push/";
 
-	public boolean push(Notification notification) throws Exception {
+	public boolean push(Notification ...notifications) throws PushException {
+		boolean ret = true;
+		for (Notification notification : notifications) {
+			boolean bln = push(notification);
+			if (!bln) {
+				ret = false;
+			}
+		}
+		return ret;
+	}
+
+	private boolean push(Notification notification) throws PushException {
 		Gson gson = new GsonBuilder()
 				.setPrettyPrinting()
 				.setVersion(1.0)
@@ -36,26 +49,30 @@ public class Pusher {
 		Credentials credentials = new UsernamePasswordCredentials(Constants.username, Constants.password);
 		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY, credentials);
 
-		HttpPost post = new HttpPost(PUSH_API);
-		post.setEntity(new JsonEntity(json));
-		logger.debug("executing request: {}", post.getRequestLine());
+		try {
+			HttpPost post = new HttpPost(PUSH_API);
+			post.setEntity(new JsonEntity(json));
+			logger.debug("executing request: {}", post.getRequestLine());
 
-		HttpResponse response = httpClient.execute(post);
-		StatusLine status = response.getStatusLine();
-		int statusCode = status.getStatusCode();
-		if (statusCode == HttpStatus.SC_OK) {
-			HttpEntity responseEntity = response.getEntity();
-			String result = EntityUtils.toString(responseEntity);
-			logger.debug("push result: {}", result);
-			JsonParser jsonParser = new JsonParser();
-			JsonElement jsonElement = jsonParser.parse(result);
-			if (jsonElement.getAsJsonObject().get("push_id") != null) {
-				logger.debug("push id: {}", jsonElement.getAsJsonObject().get("push_id").getAsString());
+			HttpResponse response = httpClient.execute(post);
+			StatusLine status = response.getStatusLine();
+			int statusCode = status.getStatusCode();
+			if (statusCode == HttpStatus.SC_OK) {
+				HttpEntity responseEntity = response.getEntity();
+				String result = EntityUtils.toString(responseEntity);
+				logger.debug("push result: {}", result);
+				JsonParser jsonParser = new JsonParser();
+				JsonElement jsonElement = jsonParser.parse(result);
+				if (jsonElement.getAsJsonObject().get("push_id") != null) {
+					logger.debug("push id: {}", jsonElement.getAsJsonObject().get("push_id").getAsString());
+				}
+				return true;
+			} else {
+				logger.error("status code: {}", statusCode);
+				return false;
 			}
-			return true;
-		} else {
-			logger.error("status code: {}", statusCode);
-			return false;
+		} catch(IOException ex) {
+			throw new PushException(ex.getMessage(), ex);
 		}
 	}
 }

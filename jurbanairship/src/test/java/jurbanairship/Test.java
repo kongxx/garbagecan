@@ -80,14 +80,14 @@ public class Test {
 	private static void testPush() throws Exception {
 		Pusher pusher = new Pusher();
 
-//		SimpleAndroidNotification notification = new SimpleAndroidNotification();
-//		notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
-//		notification.getAliases().add("myAlias");
-//		notification.getTags().add("myTag");
-//		SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
-//		android.setAlert("Hello World!");
-//		notification.setAndroid(android);
-//		pusher.push(notification);
+		SimpleAndroidNotification notification = new SimpleAndroidNotification();
+		notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
+		notification.getAliases().add("myAlias");
+		notification.getTags().add("myTag");
+		SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
+		android.setAlert("Hello World!");
+		notification.setAndroid(android);
+		pusher.push(notification);
 
 //		SimpleAppleNotification notification = new SimpleAppleNotification();
 //		notification.getDeviceTokens().add("FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660");
@@ -99,13 +99,13 @@ public class Test {
 //		notification.setAps(aps);
 //		pusher.push(notification);
 
-		SimpleBlackBerryNotification notification = new SimpleBlackBerryNotification();
-		notification.getDevicePins().add("aaaaaaaa");
-		notification.getAliases().add("myAlias");
-		notification.getTags().add("myTag");
-		SimpleBlackBerryNotification.BlackBerry blackberry = new SimpleBlackBerryNotification.BlackBerry();
-		blackberry.setBody("Hello World!");
-		blackberry.setContentType("text/plain");
-		pusher.push(notification);
+//		SimpleBlackBerryNotification notification = new SimpleBlackBerryNotification();
+//		notification.getDevicePins().add("aaaaaaaa");
+//		notification.getAliases().add("myAlias");
+//		notification.getTags().add("myTag");
+//		SimpleBlackBerryNotification.BlackBerry blackberry = new SimpleBlackBerryNotification.BlackBerry();
+//		blackberry.setBody("Hello World!");
+//		blackberry.setContentType("text/plain");
+//		pusher.push(notification);
 	}
 }
