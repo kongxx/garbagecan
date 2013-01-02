@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import jurbanairship.notification.Notification;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -31,7 +30,6 @@ public class Pusher {
 				.setVersion(1.0)
 				.create();
 		String json = gson.toJson(notification);
-		json = StringUtils.replaceOnce(json, "deviceTokens", "device_tokens");
 		logger.debug("notification json: {}", json);
 
 		DefaultHttpClient httpClient = new DefaultHttpClient();

@@ -5,6 +5,7 @@ import jurbanairship.device.Android;
 import jurbanairship.device.Blackberry;
 import jurbanairship.notification.SimpleAndroidNotification;
 import jurbanairship.notification.SimpleAppleNotification;
+import jurbanairship.notification.SimpleBlackBerryNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -97,5 +98,14 @@ public class Test {
 //		aps.setBadge("auto");
 //		notification.setAps(aps);
 //		pusher.push(notification);
+
+		SimpleBlackBerryNotification notification = new SimpleBlackBerryNotification();
+		notification.getDevicePins().add("aaaaaaaa");
+		notification.getAliases().add("myAlias");
+		notification.getTags().add("myTag");
+		SimpleBlackBerryNotification.BlackBerry blackberry = new SimpleBlackBerryNotification.BlackBerry();
+		blackberry.setBody("Hello World!");
+		blackberry.setContentType("text/plain");
+		pusher.push(notification);
 	}
 }
