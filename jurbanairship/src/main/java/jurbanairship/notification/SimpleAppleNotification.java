@@ -1,9 +1,12 @@
 package jurbanairship.notification;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleAppleNotification implements Notification {
+	@SerializedName("device_tokens")
 	private List<String> deviceTokens = new ArrayList<String>();
 	private List<String> aliases = new ArrayList<String>();
 	private List<String> tags = new ArrayList<String>();
