@@ -25,6 +25,11 @@ public class Test {
 //		bln = register.register(android);
 //		logger.info("{}", bln);
 
+		Android android = new Android();
+		android.setId("31ac6492-195a-49b5-8438-0da0f44a4fc9");
+		bln = register.unregister(android);
+		logger.info("{}", bln);
+
 //		Apple apple = new Apple();
 //		apple.setId("FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660");
 //		apple.setAlias("abc");
