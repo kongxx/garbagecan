@@ -56,6 +56,7 @@ public class Register {
 					return false;
 				}
 			} else {
+				logger.error("status code: {}", statusCode);
 				return false;
 			}
 		} catch(IOException ex) {

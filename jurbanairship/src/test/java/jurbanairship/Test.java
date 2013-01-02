@@ -4,6 +4,7 @@ import com.google.gson.*;
 import jurbanairship.device.Android;
 import jurbanairship.device.Blackberry;
 import jurbanairship.notification.SimpleAndroidNotification;
+import jurbanairship.notification.SimpleAppleNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +18,8 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 //		testRegisterAPI();
-//		testPush();
+		testPush();
 
-		JsonParser jsonParser = new JsonParser();
-		JsonElement jsonElement = jsonParser.parse("{\"push_id\": \"be747a54-54cf-11e2-b8c4-d4bed9a887d4\"}");
-		logger.debug(jsonElement.getAsJsonObject().get("push_id").getAsString());
 //		JsonObject jsonObject = new JsonObject();
 //		//jsonObject.addProperty("apids", new JsonArray());
 //		JsonArray jsonArray = new JsonArray();
@@ -79,14 +77,25 @@ public class Test {
 	}
 
 	private static void testPush() throws Exception {
-		SimpleAndroidNotification notification = new SimpleAndroidNotification();
-		notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
-		notification.getAliases().add("myAlias");
-		notification.getTags().add("myTag");
-		SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
-		android.setAlert("Hello World!");
-		notification.setAndroid(android);
 		Pusher pusher = new Pusher();
-		pusher.push(notification);
+
+//		SimpleAndroidNotification notification = new SimpleAndroidNotification();
+//		notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
+//		notification.getAliases().add("myAlias");
+//		notification.getTags().add("myTag");
+//		SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
+//		android.setAlert("Hello World!");
+//		notification.setAndroid(android);
+//		pusher.push(notification);
+
+//		SimpleAppleNotification notification = new SimpleAppleNotification();
+//		notification.getDeviceTokens().add("FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660");
+//		notification.getAliases().add("myAlias");
+//		notification.getTags().add("myTag");
+//		SimpleAppleNotification.Aps aps = new SimpleAppleNotification.Aps();
+//		aps.setAlert("Hello World!");
+//		aps.setBadge("auto");
+//		notification.setAps(aps);
+//		pusher.push(notification);
 	}
 }

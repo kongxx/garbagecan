@@ -9,10 +9,6 @@ public class SimpleAndroidNotification implements Notification {
 	private List<String> tags = new ArrayList<String>();
 	private Android android;
 
-	public SimpleAndroidNotification() {
-
-	}
-
 	public List<String> getApids() {
 		return apids;
 	}
