@@ -3,6 +3,7 @@ package jurbanairship;
 import com.google.gson.*;
 import jurbanairship.device.Android;
 import jurbanairship.device.Blackberry;
+import jurbanairship.notification.Notification;
 import jurbanairship.notification.SimpleAndroidNotification;
 import jurbanairship.notification.SimpleAppleNotification;
 import jurbanairship.notification.SimpleBlackBerryNotification;
@@ -80,14 +81,19 @@ public class Test {
 	private static void testPush() throws Exception {
 		Pusher pusher = new Pusher();
 
-		SimpleAndroidNotification notification = new SimpleAndroidNotification();
-		notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
-		notification.getAliases().add("myAlias");
-		notification.getTags().add("myTag");
-		SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
-		android.setAlert("Hello World!");
-		notification.setAndroid(android);
-		pusher.push(notification);
+		Notification[] notifications = new Notification[3];
+		for (int i = 0; i < 3; i++) {
+			SimpleAndroidNotification notification = new SimpleAndroidNotification();
+			notification.getApids().add("31ac6492-195a-49b5-8438-0da0f44a4fc9");
+			notification.getAliases().add("myAlias");
+			notification.getTags().add("myTag");
+			SimpleAndroidNotification.Android android = new SimpleAndroidNotification.Android();
+			android.setAlert("Hello World!");
+			notification.setAndroid(android);
+
+			notifications[i] = notification;
+		}
+		pusher.batchPush(notifications);
 
 //		SimpleAppleNotification notification = new SimpleAppleNotification();
 //		notification.getDeviceTokens().add("FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660");

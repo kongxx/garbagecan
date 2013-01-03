@@ -25,19 +25,9 @@ public class Pusher {
 	private static final Logger logger = LoggerFactory.getLogger(Pusher.class);
 
 	private static final String PUSH_API = "https://go.urbanairship.com/api/push/";
+	private static final String BATCH_PUSH_API = "https://go.urbanairship.com/api/push/batch/";
 
-	public boolean push(Notification ...notifications) throws PushException {
-		boolean ret = true;
-		for (Notification notification : notifications) {
-			boolean bln = push(notification);
-			if (!bln) {
-				ret = false;
-			}
-		}
-		return ret;
-	}
-
-	private boolean push(Notification notification) throws PushException {
+	public boolean push(Notification notification) throws PushException {
 		Gson gson = new GsonBuilder()
 				.setPrettyPrinting()
 				.setVersion(1.0)
@@ -51,6 +41,45 @@ public class Pusher {
 
 		try {
 			HttpPost post = new HttpPost(PUSH_API);
+			post.setEntity(new JsonEntity(json));
+			logger.debug("executing request: {}", post.getRequestLine());
+
+			HttpResponse response = httpClient.execute(post);
+			StatusLine status = response.getStatusLine();
+			int statusCode = status.getStatusCode();
+			if (statusCode == HttpStatus.SC_OK) {
+				HttpEntity responseEntity = response.getEntity();
+				String result = EntityUtils.toString(responseEntity);
+				logger.debug("push result: {}", result);
+				JsonParser jsonParser = new JsonParser();
+				JsonElement jsonElement = jsonParser.parse(result);
+				if (jsonElement.getAsJsonObject().get("push_id") != null) {
+					logger.debug("push id: {}", jsonElement.getAsJsonObject().get("push_id").getAsString());
+				}
+				return true;
+			} else {
+				logger.error("status code: {}", statusCode);
+				return false;
+			}
+		} catch(IOException ex) {
+			throw new PushException(ex.getMessage(), ex);
+		}
+	}
+
+	public boolean batchPush(Notification ...notifications) throws PushException {
+		Gson gson = new GsonBuilder()
+				.setPrettyPrinting()
+				.setVersion(1.0)
+				.create();
+		String json = gson.toJson(notifications);
+		logger.debug("notificationS json: {}", json);
+
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		Credentials credentials = new UsernamePasswordCredentials(Constants.username, Constants.password);
+		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY, credentials);
+
+		try {
+			HttpPost post = new HttpPost(BATCH_PUSH_API);
 			post.setEntity(new JsonEntity(json));
 			logger.debug("executing request: {}", post.getRequestLine());
 
