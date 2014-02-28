@@ -7,10 +7,10 @@ if (url.indexOf("douban") >= 0) {
 	if (result != null && result.length == 3) { 
 		isbn = result[2];
 	}
-} else {
+} else if (url.indexOf("amazon") >= 0) {
 	var div = document.getElementById('detail_bullets_id').innerHTML;
 	var reg = /<li><b>ISBN:<\/b>(\s*)(\w*)(,?)(\s*)(\w*)<\/li>/;
-	var result =  reg.exec(div);
+	var result = reg.exec(div);
 	if (result != null && result.length == 6) {
 		if (result[5] != null && result[5].length > 0) {
 			isbn = result[5];

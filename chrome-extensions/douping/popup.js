@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		var url = tab.url;
 		var isbn = null;
 
-		if (url.indexOf('www.amazon.cn') > 0) {
+		if (url.indexOf('amazon') > 0) {
 			chrome.tabs.executeScript(tab.id, {file: "func.js", allFrames: true}, function(isbn) {
 				if (isbn != null) {
+					if (typeof(isbn) != 'string' && isbn.length > 1) {
+						isbn = isbn[0];
+					}
 					$.ajax({
 						type: 'GET',
 						url:   "http://api.douban.com/v2/book/isbn/" + isbn,
@@ -24,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					});
 				}
 			});
-		}
-		
-		if (url.indexOf('book.douban.com/subject/') > 0) {
+		} else if (url.indexOf('book.douban.com/subject/') > 0) {
 			chrome.tabs.executeScript(tab.id, {file: "func.js", allFrames: true}, function(isbn) {
 				if (isbn != null) {
 					var amazon_url = "http://www.amazon.cn/gp/search/ref=sr_adv_b/?search-alias=stripbooks&unfiltered=1&field-title=&field-author=&field-keywords=&field-isbn="+isbn+"&field-publisher=&node=&field-price=&field-pct-off=&field-condition-type=&field-binding_browse-bin=&field-dateyear=&field-datemod=&field-dateop=&sort=relevancerank&imageField.x=20&imageField.y=10&__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99";
