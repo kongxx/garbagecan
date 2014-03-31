@@ -25,7 +25,7 @@ public class NetworkServerDerbyTest {
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 		} catch (Exception ex) {
-			Logger.getLogger(EmbeddedDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(NetworkServerDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			DbUtils.closeQuietly(ps);
 			DbUtils.closeQuietly(conn);
@@ -45,7 +45,7 @@ public class NetworkServerDerbyTest {
 				ps.executeUpdate();
 			}
 		} catch (Exception ex) {
-			Logger.getLogger(EmbeddedDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(NetworkServerDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			DbUtils.closeQuietly(ps);
 			DbUtils.closeQuietly(conn);
@@ -65,7 +65,7 @@ public class NetworkServerDerbyTest {
 				System.out.println(rs.getObject(1) + "\t" + rs.getObject(2));
 			}
 		} catch (Exception ex) {
-			Logger.getLogger(EmbeddedDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(NetworkServerDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			DbUtils.closeQuietly(rs);
 			DbUtils.closeQuietly(ps);
