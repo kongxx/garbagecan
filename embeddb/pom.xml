@@ -17,7 +17,6 @@
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
-					<optimise>true</optimise>
 					<debug>true</debug>
 				</configuration>
 			</plugin>

@@ -1,12 +1,13 @@
 package my.embeddb.derby;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.dbutils.DbUtils;
 
 public class NetworkServerDerbyTest {
 
@@ -75,7 +76,8 @@ public class NetworkServerDerbyTest {
 	
 	public static Connection getConnection() throws Exception {
 		Class.forName("org.apache.derby.jdbc.ClientDriver");
-		String url = "jdbc:derby://localhost:1527//tmp/myderbydb";
+//		String url = "jdbc:derby://localhost:1527//tmp/myderbydb";
+		String url = "jdbc:derby://localhost:1527/f:/myderbydb";
 		Connection conn = DriverManager.getConnection(url, "dbadmin", "letmein");
 		return conn;
 	}
