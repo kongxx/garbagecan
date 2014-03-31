@@ -3,7 +3,6 @@ package my.embeddb.derby;
 import org.apache.commons.dbutils.DbUtils;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
@@ -75,10 +74,11 @@ public class EmbeddedDerbyTest {
 	}
 
 	public static Connection getConnection() throws Exception {
-		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-		//String url = "jdbc:derby:/tmp/myderbydb;create=true";
-		String url = "jdbc:derby:f:myderbydb;create=true";
-		Connection conn = DriverManager.getConnection(url, "dbadmin", "letmein");
-		return conn;
+//		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+//		//String url = "jdbc:derby:/tmp/myderbydb;create=true";
+//		String url = "jdbc:derby:f:myderbydb;create=true";
+//		Connection conn = DriverManager.getConnection(url, "dbadmin", "letmein");
+//		return conn;
+		return DBUtils.getInstance().getConnection();
 	}
 }

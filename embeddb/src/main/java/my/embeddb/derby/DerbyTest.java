@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NetworkServerDerbyTest {
+public class DerbyTest {
 
 	public static void main(String[] args) throws Exception {
 		//createTable();
@@ -31,7 +31,7 @@ public class NetworkServerDerbyTest {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
+
 	public static void insertTable() {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -51,7 +51,7 @@ public class NetworkServerDerbyTest {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
+
 	public static void selectTable() {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -72,13 +72,8 @@ public class NetworkServerDerbyTest {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
+
 	public static Connection getConnection() throws Exception {
-//		Class.forName("org.apache.derby.jdbc.ClientDriver");
-////		String url = "jdbc:derby://localhost:1527//tmp/myderbydb";
-//		String url = "jdbc:derby://localhost:1527/f:/myderbydb";
-//		Connection conn = DriverManager.getConnection(url, "dbadmin", "letmein");
-//		return conn;
 		return DBUtils.getInstance().getConnection();
 	}
 }
