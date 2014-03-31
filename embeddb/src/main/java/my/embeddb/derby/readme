@@ -1,0 +1,4 @@
+
+ij> connect 'jdbc:derby:/tmp/myderbydb;user=dbadmin;password=letmein';
+
+ij> connect 'jdbc:derby://localhost:1527//tmp/myderbydb;user=dbadmin;password=letmein';
