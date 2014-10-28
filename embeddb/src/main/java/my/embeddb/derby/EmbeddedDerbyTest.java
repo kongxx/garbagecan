@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class EmbeddedDerbyTest {
 
 	public static void main(String[] args) throws Exception {
-		//createTable();
-		//insertTable();
+//		createTable();
+//		insertTable();
 		selectTable();
 	}
 	
@@ -24,6 +24,7 @@ public class EmbeddedDerbyTest {
 			String sql = "create table mytable(id int, name varchar(30))";
 			ps = conn.prepareStatement(sql);
 			ps.execute();
+			conn.commit();
 		} catch (Exception ex) {
 			Logger.getLogger(EmbeddedDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
@@ -44,6 +45,7 @@ public class EmbeddedDerbyTest {
 				ps.setObject(2, "name_" + i);
 				ps.executeUpdate();
 			}
+			conn.commit();
 		} catch (Exception ex) {
 			Logger.getLogger(EmbeddedDerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {

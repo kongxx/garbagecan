@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class DerbyTest {
 
 	public static void main(String[] args) throws Exception {
-		//createTable();
-		//insertTable();
+//		createTable();
+//		insertTable();
 		selectTable();
 	}
 
@@ -24,6 +24,7 @@ public class DerbyTest {
 			String sql = "create table mytable(id int, name varchar(30))";
 			ps = conn.prepareStatement(sql);
 			ps.execute();
+			conn.commit();
 		} catch (Exception ex) {
 			Logger.getLogger(DerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
@@ -44,6 +45,7 @@ public class DerbyTest {
 				ps.setObject(2, "name_" + i);
 				ps.executeUpdate();
 			}
+			conn.commit();
 		} catch (Exception ex) {
 			Logger.getLogger(DerbyTest.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {

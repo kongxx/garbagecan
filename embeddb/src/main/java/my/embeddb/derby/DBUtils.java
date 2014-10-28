@@ -12,12 +12,12 @@ public class DBUtils {
 	private static DBUtils dbUtils = new DBUtils();
 
 	/** Embeded */
-//	private static final String DRIVER_CLASS = "org.apache.derby.jdbc.EmbeddedDriver";
-//	private static final String DB_URL = "jdbc:derby:f:myderbydb;create=true";
+	private static final String DRIVER_CLASS = "org.apache.derby.jdbc.EmbeddedDriver";
+	private static final String DB_URL = "jdbc:derby:f:myderbydb;create=true";
 
 	/** Network */
-	private static final String DRIVER_CLASS = "org.apache.derby.jdbc.ClientDriver";
-	private static final String DB_URL = "jdbc:derby://localhost:1527/f:/myderbydb";
+//	private static final String DRIVER_CLASS = "org.apache.derby.jdbc.ClientDriver";
+//	private static final String DB_URL = "jdbc:derby://localhost:1527/f:/myderbydb";
 
 	private static final String DB_USERNAME = "dbadmin";
 	private static final String DB_PASSWORD = "letmein";
