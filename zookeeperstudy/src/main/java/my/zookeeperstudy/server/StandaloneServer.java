@@ -10,15 +10,12 @@ import java.util.List;
 
 public class StandaloneServer {
 
-	private static final int CLIENT_PORT = 2181;
-
 	public static void main(String[] args) throws Exception {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					StandaloneServer ss = new StandaloneServer();
-					ss.runServer();
+					runServer();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -31,8 +28,7 @@ public class StandaloneServer {
 			@Override
 			public void run() {
 				try {
-					StandaloneServer ss = new StandaloneServer();
-					ss.runClient();
+					runClient();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,20 +37,20 @@ public class StandaloneServer {
 
 	}
 
-	private void runServer() throws Exception {
+	private static void runServer() throws Exception {
 		int tickTime = 2000;
-		int maxClientCnxns = 5000;
+		int maxClientCnxns = 60;
 
 		File dir = new File(System.getProperty("java.io.tmpdir"), "zookeeper").getAbsoluteFile();
 
-		ZooKeeperServer server = new ZooKeeperServer(dir, dir, tickTime);
-		ServerCnxnFactory standaloneServerFactory = ServerCnxnFactory.createFactory(new InetSocketAddress(CLIENT_PORT), maxClientCnxns);
-		standaloneServerFactory.startup(server);
+		ZooKeeperServer zkServer = new ZooKeeperServer(dir, dir, tickTime);
+		ServerCnxnFactory standaloneServerFactory = ServerCnxnFactory.createFactory(new InetSocketAddress(2181), maxClientCnxns);
+		standaloneServerFactory.startup(zkServer);
 		//standaloneServerFactory.shutdown();
 	}
 
-	public void runClient() throws Exception {
-		ZooKeeper zk = new ZooKeeper("localhost:" + CLIENT_PORT, 10000,
+	public static void runClient() throws Exception {
+		ZooKeeper zk = new ZooKeeper("localhost:2181", 10000,
 				new Watcher() {
 					public void process(WatchedEvent event) {
 						System.out.println("event: " + event.getType());
