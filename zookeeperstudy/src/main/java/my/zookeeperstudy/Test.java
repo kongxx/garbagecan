@@ -5,8 +5,11 @@ import org.apache.zookeeper.*;
 import java.util.List;
 
 public class Test {
+	private static final String HOST = "9.111.254.55";
+	private static final String PORT = "2181";
+
 	public static void main(String[] args) throws Exception {
-		ZooKeeper zk = new ZooKeeper("9.111.254.55:2181", 10000,
+		ZooKeeper zk = new ZooKeeper(HOST + ":" + PORT, 10000,
 				new Watcher() {
 					public void process(WatchedEvent event) {
 						System.out.println("event: " + event.getType());
