@@ -35,9 +35,6 @@ public class StandaloneZKServer {
 		props.setProperty("clientPort", "2181");
 		props.setProperty("initLimit", "10");
 		props.setProperty("syncLimit", "5");
-//		props.setProperty("server.1", "fanbinx1:2888:3888");
-//		props.setProperty("server.2", "fanbinx2:2888:3888");
-//		props.setProperty("server.3", "fanbinx3:2888:3888");
 
 		QuorumPeerConfig quorumConfig = new QuorumPeerConfig();
 		try {
