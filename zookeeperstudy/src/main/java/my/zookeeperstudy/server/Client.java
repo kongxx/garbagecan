@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Client {
 	public static void main(String[] args) throws Exception {
-		ZooKeeper zk = new ZooKeeper("localhost:2181", 10000,
+		ZooKeeper zk = new ZooKeeper("fanbinx1:2181,fanbinx2:2181,fanbinx3:2181", 10000,
 				new Watcher() {
 					public void process(WatchedEvent event) {
 						System.out.println("event: " + event.getType());
