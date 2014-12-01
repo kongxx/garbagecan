@@ -19,5 +19,8 @@
 
 	<mvc:annotation-driven />
 	
-	<context:component-scan base-package="my.springstudy" />
+	<context:component-scan base-package="my.springstudy" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
 </beans:beans>

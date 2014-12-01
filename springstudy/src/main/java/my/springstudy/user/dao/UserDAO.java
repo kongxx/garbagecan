@@ -1,8 +1,12 @@
 package my.springstudy.user.dao;
 
+import my.springstudy.dao.BaseDao;
 import my.springstudy.user.model.User;
 
-public interface UserDAO {
-	public User findById(String id);
+public interface UserDAO extends BaseDao<User, String> {
+
+//	void add(User user);
+//
+//	User findById(String id);
 }
 

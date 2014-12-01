@@ -1,17 +1,17 @@
 package my.springstudy.user.dao;
 
+import my.springstudy.dao.GenericBaseDao;
 import my.springstudy.user.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+
 @Repository ("userDAOHibernateImpl")
-public class UserDAOHibernateImpl implements UserDAO {
+public class UserDAOHibernateImpl extends GenericBaseDao<User, String> implements UserDAO {
 
-	@Autowired
-	private HibernateTemplate hibernateTemplate;
-
-	public User findById(String id) {
-		return hibernateTemplate.get(User.class, id);
+	@PostConstruct
+	public void init() {
+		this.entityClass = User.class;
 	}
+
 }

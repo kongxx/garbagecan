@@ -1,25 +1,38 @@
 package my.springstudy.user.service;
 
 import my.springstudy.user.dao.UserDAO;
+import my.springstudy.user.dao.UserDAOHibernateImpl;
 import my.springstudy.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import javax.annotation.Resources;
 
 @Service
 public class UserService {
-	@Autowired
-	@Qualifier ("userDAOJDBCImpl")
-	private UserDAO userDAOJDBCImpl;
+//	@Autowired
+//	@Qualifier ("userDAOJDBCImpl")
+//	private UserDAO userDAOJDBCImpl;
+//
+//	@Autowired
+//	@Qualifier ("userDAOHibernateImpl")
+//	private UserDAO userDAOHibernateImpl;
 
 	@Autowired
-	@Qualifier ("userDAOJDBCImpl")
-	private UserDAO userDAOHibernateImpl;
+	@Qualifier ("userDAOHibernateImpl")
+	private UserDAO userDAO;
 
-	public User find(String id) {
-		System.out.println("JDBC: " + userDAOJDBCImpl.findById(id));
-		System.out.println("Hibernate: " + userDAOHibernateImpl.findById(id));
-		return userDAOHibernateImpl.findById(id);
+	@Transactional
+	public User add(User user) {
+		userDAO.save(user);
+		return user;
+	}
+
+	@Transactional
+	public User findById(String id) {
+		return userDAO.get(id);
 	}
 }

@@ -16,7 +16,7 @@ public class HelloController {
 	@RequestMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
 		model.addAttribute("name", name);
-		System.out.println(userService.find("1"));
+		System.out.println(userService.findById("1"));
 		return "hello";
 	}
 }
