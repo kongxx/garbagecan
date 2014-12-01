@@ -1,5 +1,6 @@
-package my.springstudy;
+package my.springstudy.user.controller;
 
+import my.springstudy.*;
 import my.springstudy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HelloController {
+public class UserController {
 
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/hello")
-	public String hello(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-		model.addAttribute("name", name);
-		System.out.println(userService.find("1"));
-		return "hello";
+	@RequestMapping("/user/list")
+	public String list(Model model) {
+//		model.addAttribute("users", name);
+//		System.out.println(userService.find("1"));
+		return "list";
 	}
 }

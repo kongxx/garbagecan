@@ -15,10 +15,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="my.springstudy" />
-
 	<mvc:view-controller path="/" view-name="home"/>
 
 	<mvc:annotation-driven />
 	
+	<context:component-scan base-package="my.springstudy" />
 </beans:beans>
