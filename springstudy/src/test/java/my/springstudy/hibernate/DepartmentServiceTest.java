@@ -1,6 +1,5 @@
 package my.springstudy.hibernate;
 
-import my.springstudy.user.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.AfterMethod;
@@ -22,7 +21,10 @@ public class DepartmentServiceTest {
 
 	@BeforeMethod
 	public void setUp() throws Exception {
-
+		Department department = departmentService.findById("0");
+		if (department != null) {
+			departmentService.deleteById("0");
+		}
 	}
 
 	@AfterMethod
@@ -40,34 +42,63 @@ public class DepartmentServiceTest {
 	}
 
 	@Test
-	public void testAddChild() throws Exception {
+	public void testAdd() throws Exception {
 		Department parent = new Department("0", "root");
-		Department child1 = new Department("1", "child1");
-		Department child11 = new Department("11", "child11");
-		child1.addChild(child11);
-		parent.addChild(child1);
+		Department subDepartment1 = new Department("1", "subDepartment1");
+		Department subDepartment2 = new Department("2", "subDepartment2");
+		parent.addDepartment(subDepartment1);
+		parent.addDepartment(subDepartment2);
+		parent.addUser(new User("0", "admin"));
+		subDepartment1.addUser(new User("1", "user1"));
+		subDepartment2.addUser(new User("2", "user2"));
 		departmentService.add(parent);
 
 		Department department = departmentService.findById("0");
 		assertNotNull(department);
 		assertEquals("root", department.getName());
-		assertEquals(1, department.getChildren().size());
-		assertEquals("child1", department.getChildren().iterator().next().getName());
-		assertEquals("child11", department.getChildren().iterator().next().getChildren().iterator().next().getName());
+		assertEquals(2, department.getDepartments().size());
+		assertEquals(1, department.getUsers().size());
 
 		department = departmentService.findById("1");
 		assertNotNull(department);
-		assertEquals("child1", department.getName());
+		assertEquals("subDepartment1", department.getName());
 		assertEquals("root", department.getParent().getName());
+		assertEquals(1, department.getUsers().size());
 
-		department = departmentService.findById("11");
+		department = departmentService.findById("2");
 		assertNotNull(department);
-		assertEquals("child11", department.getName());
-		assertEquals("child1", department.getParent().getName());
+		assertEquals("subDepartment2", department.getName());
+		assertEquals("root", department.getParent().getName());
+		assertEquals(1, department.getUsers().size());
 	}
 
-	@org.testng.annotations.Test
-	public void testFindById() throws Exception {
+	@Test
+	public void testDeleteById() throws Exception {
+		Department department = new Department("0", "root");
+		department.addDepartment(new Department("1", "department"));
+		department.addUser(new User("1", "user"));
+		departmentService.add(department);
+		department = departmentService.findById("0");
+		assertNotNull(department);
+		assertEquals(1, department.getUsers().size());
+		assertEquals(1, department.getDepartments().size());
 
+		departmentService.deleteById("0");
+		department = departmentService.findById("0");
+		assertNull(department);
+	}
+
+	@Test
+	public void testFindById() throws Exception {
+		Department department = null;
+
+		department = departmentService.findById("0");
+		assertNull(department);
+
+		department = new Department("0", "root");
+		departmentService.add(department);
+		department = departmentService.findById("0");
+		assertNotNull(department);
+		assertEquals("root", department.getName());
 	}
 }

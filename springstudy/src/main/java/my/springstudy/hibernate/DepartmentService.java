@@ -19,6 +19,10 @@ public class DepartmentService {
 	}
 
 	@Transactional
+	public void deleteById(String id) {
+		departmentDAO.deleteByKey(id);
+	}
+
 	public Department findById(String id) {
 		return departmentDAO.get(id);
 	}

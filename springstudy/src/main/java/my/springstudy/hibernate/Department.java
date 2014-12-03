@@ -23,7 +23,10 @@ public class Department implements Serializable {
 	private Department parent;
 
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "parent", fetch = FetchType.EAGER)
-	private Set<Department> children = new HashSet<Department>();
+	private Set<Department> departments = new HashSet<Department>();
+
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "department", fetch = FetchType.EAGER)
+	private Set<User> users = new HashSet<User>();
 
 	public Department() {
 
@@ -58,18 +61,32 @@ public class Department implements Serializable {
 		this.parent = parent;
 	}
 
-	public Set<Department> getChildren() {
-		return children;
+	public Set<Department> getDepartments() {
+		return departments;
 	}
 
-	public void setChildren(Set<Department> children) {
-		this.children = children;
+	public void setDepartments(Set<Department> departments) {
+		this.departments = departments;
 	}
 
-	public void addChild(Department child){
-		child.setParent(this);
-		this.children.add(child);
+	public void addDepartment(Department department){
+		department.setParent(this);
+		this.departments.add(department);
 	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+	public void addUser(User user){
+		user.setDepartment(this);
+		this.users.add(user);
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

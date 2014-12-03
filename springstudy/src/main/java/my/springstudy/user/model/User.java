@@ -5,8 +5,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name="user")
+@Entity (name = "t_user")
+@Table(name="t_user")
 public class User implements Serializable {
 
 	@Id
