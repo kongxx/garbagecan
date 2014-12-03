@@ -32,7 +32,25 @@
 
 	<tx:annotation-driven transaction-manager="jdbcTransactionManager"/>
 	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
-
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="packagesToScan" value="my.springstudy"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/springstudy"/>
+		<property name="username" value="root"/>
+		<property name="password" value="Letmein"/>
+	</bean>
+	<!--
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="packagesToScan" value="my.springstudy"/>
@@ -52,5 +70,5 @@
 		<property name="username" value="sa"/>
 		<property name="password" value=""/>
 	</bean>
-
+	-->
 </beans>
