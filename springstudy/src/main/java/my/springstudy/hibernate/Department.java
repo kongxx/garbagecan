@@ -18,15 +18,15 @@ public class Department implements Serializable {
 	@Column(name = "name", length = 32, nullable = false)
 	private String name;
 
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name="parent_id")
 	private Department parent;
 
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH},
+	@OneToMany(cascade = {CascadeType.ALL},
 			mappedBy = "parent", fetch = FetchType.EAGER)
 	private Set<Department> departments = new HashSet<Department>();
 
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH},
+	@OneToMany(cascade = {CascadeType.ALL},
 			mappedBy = "department", fetch = FetchType.EAGER)
 	private Set<User> users = new HashSet<User>();
 

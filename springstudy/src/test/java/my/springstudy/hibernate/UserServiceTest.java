@@ -23,7 +23,10 @@ public class UserServiceTest {
 
 	@BeforeMethod
 	public void setUp() throws Exception {
-
+		Department department = departmentService.findById("0");
+		if (department != null) {
+			departmentService.deleteById("0");
+		}
 	}
 
 	@AfterMethod
@@ -36,11 +39,18 @@ public class UserServiceTest {
 		Department department = new Department("0", "root");
 		departmentService.add(department);
 		department = departmentService.findById("0");
+		assertNotNull(department);
 
 		User user = new User("0", "admin");
 		user.setDepartment(department);
 		userService.add(user);
+		user = userService.findById("0");
+		assertNotNull(user);
+		System.out.println(user.getDepartment());
+
 		userService.deleteById("0");
+		user = userService.findById("0");
+		assertNull(user);
 	}
 
 //	@Test

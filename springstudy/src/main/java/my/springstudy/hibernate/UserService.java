@@ -17,7 +17,12 @@ public class UserService {
 
 	@Transactional
 	public void deleteById(String id) {
-		userDAO.deleteByKey(id);
+		User user = userDAO.get(id);
+		if (user != null) {
+			user.getDepartment().getUsers().remove(user);
+			user.setDepartment(null);
+			userDAO.delete(user);
+		}
 	}
 
 	public User findById(String id) {

@@ -43,17 +43,17 @@ public class DepartmentServiceTest {
 
 	@Test
 	public void testAdd() throws Exception {
-		Department parent = new Department("0", "root");
+		Department department = new Department("0", "root");
 		Department subDepartment1 = new Department("1", "subDepartment1");
 		Department subDepartment2 = new Department("2", "subDepartment2");
-		parent.addDepartment(subDepartment1);
-		parent.addDepartment(subDepartment2);
-		parent.addUser(new User("0", "admin"));
+		department.addDepartment(subDepartment1);
+		department.addDepartment(subDepartment2);
+		department.addUser(new User("0", "admin"));
 		subDepartment1.addUser(new User("1", "user1"));
 		subDepartment2.addUser(new User("2", "user2"));
-		departmentService.add(parent);
+		departmentService.add(department);
 
-		Department department = departmentService.findById("0");
+		department = departmentService.findById("0");
 		assertNotNull(department);
 		assertEquals("root", department.getName());
 		assertEquals(2, department.getDepartments().size());
@@ -86,6 +86,16 @@ public class DepartmentServiceTest {
 		departmentService.deleteById("0");
 		department = departmentService.findById("0");
 		assertNull(department);
+
+		department = new Department("0", "root");
+		department.addDepartment(new Department("1", "department"));
+		departmentService.add(department);
+		department = departmentService.findById("1");
+		assertNotNull(department);
+		departmentService.deleteById("1");
+		department = departmentService.findById("1");
+		assertNull(department);
+
 	}
 
 	@Test

@@ -17,7 +17,14 @@ public class DepartmentService {
 
 	@Transactional
 	public void deleteById(String id) {
-		departmentDAO.deleteByKey(id);
+		Department department = departmentDAO.get(id);
+		if (department != null) {
+			if (department.getParent() != null) {
+				department.getParent().getDepartments().remove(department);
+				department.setParent(null);
+			}
+			departmentDAO.delete(department);
+		}
 	}
 
 	public Department findById(String id) {
