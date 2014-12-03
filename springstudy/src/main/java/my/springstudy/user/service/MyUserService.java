@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import javax.annotation.Resources;
 
 @Service
-public class UserService {
+public class MyUserService {
 //	@Autowired
 //	@Qualifier ("userDAOJDBCImpl")
 //	private UserDAO userDAOJDBCImpl;

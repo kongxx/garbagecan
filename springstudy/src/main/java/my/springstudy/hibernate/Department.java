@@ -22,10 +22,12 @@ public class Department implements Serializable {
 	@JoinColumn(name="parent_id")
 	private Department parent;
 
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "parent", fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH},
+			mappedBy = "parent", fetch = FetchType.EAGER)
 	private Set<Department> departments = new HashSet<Department>();
 
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "department", fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH},
+			mappedBy = "department", fetch = FetchType.EAGER)
 	private Set<User> users = new HashSet<User>();
 
 	public Department() {

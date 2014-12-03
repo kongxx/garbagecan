@@ -16,8 +16,8 @@ public class User implements Serializable {
 	@Column(name = "name", length = 32, nullable = false)
 	private String name;
 
-	@ManyToOne()
-	@JoinColumn(name="department_id")
+	@ManyToOne
+	@JoinColumn(name="department_id", nullable = false)
 	private Department department;
 
 	public User() {

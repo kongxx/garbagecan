@@ -5,22 +5,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class DepartmentService {
+public class UserService {
 
 	@Autowired
-	private DepartmentDAO departmentDAO;
+	private UserDAO userDAO;
 
 	@Transactional
-	public void add(Department department) {
-		departmentDAO.save(department);
+	public void add(User user) {
+		userDAO.save(user);
 	}
 
 	@Transactional
 	public void deleteById(String id) {
-		departmentDAO.deleteByKey(id);
+		userDAO.deleteByKey(id);
 	}
 
-	public Department findById(String id) {
-		return departmentDAO.get(id);
+	public User findById(String id) {
+		return userDAO.get(id);
 	}
 }

@@ -1,18 +1,16 @@
 package my.springstudy.user.controller;
 
-import my.springstudy.*;
-import my.springstudy.user.service.UserService;
+import my.springstudy.user.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private MyUserService userService;
 	
 	@RequestMapping("/user/list")
 	public String list(Model model) {
