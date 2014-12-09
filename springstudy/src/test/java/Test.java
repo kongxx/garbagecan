@@ -6,13 +6,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Test {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("/spring.xml");
-		MyUserService userService = (MyUserService) ctx.getBean("userService");
-		System.out.println(userService.findById("1"));
+		MyUserService userService = (MyUserService) ctx.getBean("myUserService");
 		User user = new User();
-		user.setId("3");
-		user.setUsername("3");
-		user.setPassword("3");
-		userService.add(user);
-		System.out.println(userService.findById("3"));
+		user.setUsername("4");
+		user.setPassword("4");
+		user = userService.add(user);
+		System.out.println(user);
 	}
 }
