@@ -27,8 +27,7 @@ public class MyUserService {
 
 	@Transactional
 	public User add(User user) {
-		userDAO.save(user);
-		return user;
+		return userDAO.save(user);
 	}
 
 	@Transactional

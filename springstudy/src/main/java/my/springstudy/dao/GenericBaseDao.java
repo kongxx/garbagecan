@@ -32,8 +32,9 @@ public class GenericBaseDao<T extends Serializable, PK extends Serializable> imp
 		this.hibernateTemplate.update(entity);
 	}
 
-	public void save(T entity) {
-		this.hibernateTemplate.save(entity);
+	public T save(T entity) {
+		Serializable id = this.hibernateTemplate.save(entity);
+		return (T) this.hibernateTemplate.load((Class)entityClass, id);
 	}
 
 	public void delete(T entity) {

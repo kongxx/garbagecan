@@ -14,7 +14,7 @@ public interface BaseDao<T extends Serializable, PK extends Serializable> {
 
     public void update(T entity);
 
-    public void save(T entity);
+    public T save(T entity);
 
     public void delete(T entity);
 

@@ -1,6 +1,7 @@
 package my.springstudy.user.model;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,8 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "id")
+	@GenericGenerator(name = "UUID", strategy = "uuid")
+	@GeneratedValue(generator = "UUID")
 	private String id;
 
 	@Column(name = "username")
