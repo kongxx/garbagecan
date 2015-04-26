@@ -20,4 +20,20 @@
 		]]>
 	</select>
 
+	<insert id="add" parameterType="my.mybatisstudy.user.model.User">
+		INSERT INTO USER (id, username, password)
+		VALUES (#{id}, #{username}, #{password})
+	</insert>
+
+	<update id="update" parameterType="my.mybatisstudy.user.model.User">
+		UPDATE USER SET
+		username=#{username},
+		password=#{password}
+		WHERE
+		id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM USER WHERE id=#{id}
+	</delete>
 </mapper>

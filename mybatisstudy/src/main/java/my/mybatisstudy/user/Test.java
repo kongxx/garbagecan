@@ -11,14 +11,26 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("/spring.xml");
 		UserService userService = (UserService) ctx.getBean("userService");
-//		User user = new User();
-//		user.setUsername("4");
-//		user.setPassword("4");
-//		user = userService.add(user);
-//		System.out.println(user);
 
-//		User user = userService.find("1");
-//		System.out.println(user);
+		User user = new User();
+		String id = "" + System.currentTimeMillis();
+		user.setId(id);
+		user.setUsername("user_" + id);
+		user.setPassword("password_" + id);
+		userService.add(user);
+
+		user = userService.find(id);
+		System.out.println(user);
+
+		user.setUsername("test");
+		user.setPassword("test");
+		userService.update(user);
+		user = userService.find(id);
+		System.out.println(user);
+
+		userService.delete(user.getId());
+		user = userService.find(id);
+		System.out.println(user);
 
 		List<User> users = userService.list();
 		System.out.println(users);

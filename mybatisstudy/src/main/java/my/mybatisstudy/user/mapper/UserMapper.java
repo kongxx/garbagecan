@@ -10,10 +10,10 @@ public interface UserMapper {
 
 	User find(String id);
 
-//	void add(User user);
-//
-//	void update(User user);
-//
-//	void delete(String id);
+	void add(User user);
+
+	void update(User user);
+
+	void delete(String id);
 
 }

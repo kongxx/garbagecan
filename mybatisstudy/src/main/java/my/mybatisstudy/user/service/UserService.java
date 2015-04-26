@@ -21,4 +21,16 @@ public class UserService {
 	public User find(String id) {
 		return userMapper.find(id);
 	}
+
+	public void add(User user) {
+		userMapper.add(user);
+	}
+
+	public void update(User user) {
+		userMapper.update(user);
+	}
+
+	public void delete(String id) {
+		userMapper.delete(id);
+	}
 }
