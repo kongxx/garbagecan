@@ -2,19 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="my.mybatisstudy.user.mapper.UserMapper">
 
-	<resultMap type="my.mybatisstudy.user.model.User" id="userResultMapper">
-		<id property="id" column="id"/>
-		<result property="username" column="username"/>
-		<result property="password" column="password"/>
-	</resultMap>
-
-	<select id="list" resultType="my.mybatisstudy.user.model.User" resultMap="userResultMapper">
+	<select id="list" resultType="my.mybatisstudy.user.model.User">
 		<![CDATA[
 			SELECT * FROM USER
 		]]>
 	</select>
 
-	<select id="find" parameterType="String" resultType="my.mybatisstudy.user.model.User" resultMap="userResultMapper">
+	<select id="find" parameterType="String" resultType="my.mybatisstudy.user.model.User">
 		<![CDATA[
 			SELECT * FROM USER WHERE ID = #{id}
 		]]>

@@ -21,7 +21,6 @@
 	default-lazy-init="true">
 
 	<context:component-scan base-package="my.mybatisstudy" >
-
 	</context:component-scan>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -76,6 +75,11 @@
 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="my.mybatisstudy.user.mapper.UserMapper"/>
+	</bean>
+
+	<bean id="hostMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="my.mybatisstudy.host.mapper.HostMapper"/>
 	</bean>
 
 </beans> 
