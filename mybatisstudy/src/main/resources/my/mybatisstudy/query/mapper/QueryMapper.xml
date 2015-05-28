@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.mybatisstudy.query.mapper.QueryMapper">
+
+	<select id="queryChartData" parameterType="java.util.Map" resultType="java.util.Map">
+		select sampling_time as time, round(avg(ut * 100), 2) as ut
+		from
+		(
+			select sampling_time, license_name, sum(license_usage)/(CASE WHEN sum(license_total) = 0 THEN 1 ELSE sum(license_total) END) as ut
+			from (
+				select sampling_time, license_name, feature_name,license_server, avg(license_total) as license_total, sum(license_usage) as license_usage
+				from flexlm_license_usage
+				<trim prefix="where" prefixOverrides="and">
+					<if test="license_name != null and license_name != ''">
+						license_name=#{license_name}
+					</if>
+					<if test="license_vendor != null and license_vendor != ''">
+						and license_vendor=#{license_vendor}
+					</if>
+					<if test="feature_name != null and feature_name != ''">
+						and feature_name=#{feature_name}
+					</if>
+					<if test="user_name != null and user_name != ''">
+						and user_name=#{user_name}
+					</if>
+					<if test="host_name != null and host_name != ''">
+						and host_name=#{host_name}
+					</if>
+					<if test="start_time != null">
+						and sampling_time &gt;=to_timestamp(#{start_time}, 'yyyy-mm-dd hh24:mi:ss')
+					</if>
+					<if test="end_time != null">
+						and sampling_time &lt;= to_timestamp(#{end_time}, 'yyyy-mm-dd hh24:mi:ss')
+					</if>
+				</trim>
+				group by feature_name, license_name, license_server, sampling_time
+			) t1
+			group by sampling_time, license_name
+		) t2
+		group by sampling_time order by sampling_time asc
+	</select>
+</mapper>

@@ -29,11 +29,18 @@
 		<property name="mapperLocations"  value="classpath:/my/mybatisstudy/**/*Mapper.xml" />
 	</bean>
 
+	<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >-->
+		<!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+		<!--<property name="url" value="jdbc:mysql://192.168.0.33:30001/test"/>-->
+		<!--<property name="username" value="root"/>-->
+		<!--<property name="password" value="Letmein"/>-->
+	<!--</bean>-->
+
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://192.168.0.33:30001/test"/>
-		<property name="username" value="root"/>
-		<property name="password" value="Letmein"/>
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgresql://192.168.145.100:5432/jhinno"/>
+		<property name="username" value="jhinno"/>
+		<property name="password" value="jhinno"/>
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -82,4 +89,8 @@
 		<property name="mapperInterface" value="my.mybatisstudy.host.mapper.HostMapper"/>
 	</bean>
 
+	<bean id="queryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="my.mybatisstudy.query.mapper.QueryMapper"/>
+	</bean>
 </beans> 
