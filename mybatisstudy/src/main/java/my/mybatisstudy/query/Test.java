@@ -15,16 +15,36 @@ public class Test {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("/spring.xml");
 		QueryService service = (QueryService) ctx.getBean("queryService");
 
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("license_name", "");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date startTime = sdf.parse("2015-05-28 15:00:00");
-		Date endTime = sdf.parse("2015-05-28 16:00:00");
-		params.put("start_time", startTime);
-		params.put("end_time", endTime);
-		List<Map<String, Object>> records = service.queryChartData(params);
-		for (Map<String, Object> record : records) {
-			System.out.println(record);
-		}
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params.put("license_name", null);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		Date startTime = sdf.parse("2015-05-28 15:00:00");
+//		Date endTime = sdf.parse("2015-05-28 16:00:00");
+//		params.put("start_time", startTime);
+//		params.put("end_time", endTime);
+//		List<Map<String, Object>> records = service.queryChartData(params);
+//		for (Map<String, Object> record : records) {
+//			System.out.println(record);
+//		}
+
+		List<Map<String, Object>> licenseNames = service.listLicenseName();
+		System.out.println(licenseNames);
+
+		List<Map<String, Object>> values = null;
+		values = service.listValueByLicense(null, "feature_name");
+		System.out.println(values);
+		values = service.listValueByLicense("", "feature_name");
+		System.out.println(values);
+		values = service.listValueByLicense("MyLicense", "feature_name");
+		System.out.println(values);
+		values = service.listValueByLicense("MyLicense1", "feature_name");
+		System.out.println(values);
+
+		values = service.listValueByLicense("MyLicense", "license_vendor");
+		System.out.println(values);
+		values = service.listValueByLicense("MyLicense", "user_name");
+		System.out.println(values);
+		values = service.listValueByLicense("MyLicense", "host_name");
+		System.out.println(values);
 	}
 }
