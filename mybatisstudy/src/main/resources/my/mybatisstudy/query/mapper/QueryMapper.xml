@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="my.mybatisstudy.query.mapper.QueryMapper">
 
+	<select id="listLicenseName" resultType="java.util.Map">
+		select distinct(license_name) from license_setting
+	</select>
+
+	<select id="listValueByLicense" resultType="java.util.Map">
+		select distinct(${column}) from flexlm_license_usage
+		<choose>
+			<when test="license_name != null and license_name != ''">
+				where license_name=#{license_name} and ${column} != '-'
+			</when>
+			<otherwise>
+				where license_name in (select distinct(license_name) from license_setting) and ${column} != '-'
+			</otherwise>
+		</choose>
+	</select>
+
 	<select id="queryChartData" parameterType="java.util.Map" resultType="java.util.Map">
 		select sampling_time as time, round(avg(ut * 100), 2) as ut
 		from
