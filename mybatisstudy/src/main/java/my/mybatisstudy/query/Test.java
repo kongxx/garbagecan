@@ -27,24 +27,32 @@ public class Test {
 //			System.out.println(record);
 //		}
 
-		List<Map<String, Object>> licenseNames = service.listLicenseName();
-		System.out.println(licenseNames);
+//		List<Map<String, Object>> licenseNames = service.listLicenseName();
+//		System.out.println(licenseNames);
+//
+//		List<Map<String, Object>> values = null;
+//		values = service.listValueByLicense(null, "feature_name");
+//		System.out.println(values);
+//		values = service.listValueByLicense("", "feature_name");
+//		System.out.println(values);
+//		values = service.listValueByLicense("MyLicense", "feature_name");
+//		System.out.println(values);
+//		values = service.listValueByLicense("MyLicense1", "feature_name");
+//		System.out.println(values);
+//
+//		values = service.listValueByLicense("MyLicense", "license_vendor");
+//		System.out.println(values);
+//		values = service.listValueByLicense("MyLicense", "user_name");
+//		System.out.println(values);
+//		values = service.listValueByLicense("MyLicense", "host_name");
+//		System.out.println(values);
 
-		List<Map<String, Object>> values = null;
-		values = service.listValueByLicense(null, "feature_name");
-		System.out.println(values);
-		values = service.listValueByLicense("", "feature_name");
-		System.out.println(values);
-		values = service.listValueByLicense("MyLicense", "feature_name");
-		System.out.println(values);
-		values = service.listValueByLicense("MyLicense1", "feature_name");
-		System.out.println(values);
-
-		values = service.listValueByLicense("MyLicense", "license_vendor");
-		System.out.println(values);
-		values = service.listValueByLicense("MyLicense", "user_name");
-		System.out.println(values);
-		values = service.listValueByLicense("MyLicense", "host_name");
-		System.out.println(values);
+		for (int i = 0; i < 10; i++) {
+			System.out.println(service.list().size());
+			Thread.sleep(2000);
+			if (i % 2 == 0) {
+				service.IDU();
+			}
+		}
 	}
 }
