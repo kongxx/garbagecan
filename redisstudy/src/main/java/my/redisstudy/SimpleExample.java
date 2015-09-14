@@ -70,31 +70,4 @@ public class SimpleExample {
 		jedis.disconnect();
 	}
 
-	private static void testMap2() {
-		System.out.println("========================= test map2 =========================");
-		Jedis jedis = new Jedis(REDIS_HOST);
-
-		Map<String, Map<String, String>> map = new LinkedHashMap<String,Map<String, String>>();
-		Map<String,String> map1 = new LinkedHashMap<String,String>();
-		map1.put("key11", "value11");
-		map1.put("key12", "value12");
-		Map<String,String> map2 = new LinkedHashMap<String,String>();
-		map1.put("key21", "value21");
-		map1.put("key22", "value22");
-		map.put("map1", map1);
-		map.put("map2", map2);
-
-//		jedis.hmset("map", map);
-//		System.out.println(jedis.hkeys("map"));
-//		System.out.println(jedis.hgetAll("map"));
-//		System.out.println(jedis.hget("map", "key1"));
-//
-//		Iterator<String> it = jedis.hkeys("map").iterator();
-//		while (it.hasNext()){
-//			String key = it.next();
-//			System.out.println(key + ": " + jedis.hget("map", key));
-//		}
-
-		jedis.disconnect();
-	}
 }
