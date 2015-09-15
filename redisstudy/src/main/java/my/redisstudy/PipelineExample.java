@@ -16,7 +16,7 @@ public class PipelineExample {
 	public static void testPipeline() throws Exception {
 		Jedis jedis = new Jedis(REDIS_HOST);
 		Pipeline pipeline = jedis.pipelined();
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10; i++) {
 			pipeline.set("key_" + i, "value_" + i);
 		}
 		List<Object> results = pipeline.syncAndReturnAll();

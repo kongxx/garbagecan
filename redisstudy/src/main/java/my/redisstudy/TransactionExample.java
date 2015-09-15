@@ -11,7 +11,7 @@ public class TransactionExample {
 	public static void main(String[] args) throws Exception {
 		Jedis jedis = new Jedis(REDIS_HOST);
 		Transaction tx = jedis.multi();
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10; i++) {
 			tx.set("key_" + i, "value_" + i);
 		}
 		List<Object> results = tx.exec();
