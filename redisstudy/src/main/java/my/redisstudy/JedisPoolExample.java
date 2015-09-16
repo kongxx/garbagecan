@@ -24,7 +24,7 @@ public class JedisPoolExample {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			jedis.disconnect();
+			jedis.close();
 		}
 
 		pool.destroy();
