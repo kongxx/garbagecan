@@ -24,7 +24,15 @@ public class HttpUtils {
 	public static <T> T doGet(String path, Map<String, Object> params, ResponseHandler<T> responseHandler) throws ExecuteException {
 		OkHttpClient client = new OkHttpClient();
 		String credential = Credentials.basic(USERNAME, PASSWORD);
-		Request request = new Request.Builder().url(BASE_URL + path).header("Authorization", credential).build();
+		Request.Builder builder = new Request.Builder();
+		builder = builder.url(BASE_URL + path);
+		builder = builder.header("Authorization", credential);
+		if (params != null) {
+			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				builder = builder.addHeader(entry.getKey(), String.valueOf(entry.getValue()));
+			}
+		}
+		Request request = builder.build();
 		try {
 			Response response = client.newCall(request).execute();
 			return responseHandler.handle(response);
@@ -35,12 +43,15 @@ public class HttpUtils {
 		}
 	}
 	
-	public static <T> T doPost(ResponseHandler<T> responseHandler) throws ExecuteException {
-		String json = "{\"title\": \"abc\", \"create_user\":1,\"summary\":\"This field is required.\"}";
+	public static <T> T doPost(String json, ResponseHandler<T> responseHandler) throws ExecuteException {
 		OkHttpClient client = new OkHttpClient();
 		RequestBody body = RequestBody.create(JSON, json);
 		String credential = Credentials.basic(USERNAME, PASSWORD);
-		Request request = new Request.Builder().url(BASE_URL+"/articles/api/articles/").header("Authorization", credential).post(body).build();
+		Request request = new Request.Builder()
+				.url(BASE_URL+"/articles/api/articles/")
+				.header("Authorization", credential)
+				.post(body)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			return responseHandler.handle(response);
@@ -50,4 +61,5 @@ public class HttpUtils {
 			throw new ExecuteException(e.getMessage(), e);
 		}
 	}
+
 }
