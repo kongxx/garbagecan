@@ -1,4 +1,4 @@
-package my.redisstudy;
+package my.redisstudy.host;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +14,7 @@ public class HostServiceTest {
 	private static final int REDIS_PORT = 6379;
 	private static final int REDIS_CONNECTION_TIMEOUT = 600000;
 	private static final int REDIS_TIMEOUT = 600000;
+	
 	private static final String HOSTS_KEY = "hosts";
 	
 	public static void main(String[] args) {
