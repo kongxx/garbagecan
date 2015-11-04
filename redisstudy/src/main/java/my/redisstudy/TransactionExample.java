@@ -16,6 +16,7 @@ public class TransactionExample {
 		}
 		List<Object> results = tx.exec();
 		jedis.disconnect();
+		jedis.close();
 	}
 
 }

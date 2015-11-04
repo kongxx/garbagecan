@@ -30,6 +30,7 @@ public class SimpleExample {
 		Thread.sleep(5 * 1000);
 		System.out.println(jedis.get("foo"));
 		jedis.disconnect();
+		jedis.close();
 	}
 
 	private static void testList() {
@@ -47,6 +48,7 @@ public class SimpleExample {
 		System.out.println(jedis.lpop("mykey2"));
 
 		jedis.disconnect();
+		jedis.close();
 	}
 
 	private static void testMap() {
@@ -68,6 +70,7 @@ public class SimpleExample {
 		}
 
 		jedis.disconnect();
+		jedis.close();
 	}
 
 }

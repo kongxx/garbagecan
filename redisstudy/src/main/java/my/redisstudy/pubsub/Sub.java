@@ -29,5 +29,7 @@ public class Sub {
 			public void onPMessage(String pattern, String channel, String message) {
 			}
 		}, "mychannel");
+//		jedis.disconnect();
+//		jedis.close();
 	}
 }

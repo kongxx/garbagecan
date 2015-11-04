@@ -22,6 +22,7 @@ public class PipelineExample {
 		List<Object> results = pipeline.syncAndReturnAll();
 		System.out.println(results);
 		jedis.disconnect();
+		jedis.close();
 	}
 
 }

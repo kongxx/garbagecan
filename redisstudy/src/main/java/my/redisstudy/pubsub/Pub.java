@@ -14,5 +14,6 @@ public class Pub {
 
 		}
 //		jedis.disconnect();
+//		jedis.close();
 	}
 }
