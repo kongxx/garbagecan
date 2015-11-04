@@ -43,12 +43,12 @@ public class HttpUtils {
 		}
 	}
 	
-	public static <T> T doPost(String json, ResponseHandler<T> responseHandler) throws ExecuteException {
+	public static <T> T doPost(String path, String json, ResponseHandler<T> responseHandler) throws ExecuteException {
 		OkHttpClient client = new OkHttpClient();
 		RequestBody body = RequestBody.create(JSON, json);
 		String credential = Credentials.basic(USERNAME, PASSWORD);
 		Request request = new Request.Builder()
-				.url(BASE_URL+"/articles/api/articles/")
+				.url(BASE_URL + path)
 				.header("Authorization", credential)
 				.post(body)
 				.build();
@@ -62,4 +62,40 @@ public class HttpUtils {
 		}
 	}
 
+	public static <T> T doPut(String path, String json, ResponseHandler<T> responseHandler) throws ExecuteException {
+		OkHttpClient client = new OkHttpClient();
+		RequestBody body = RequestBody.create(JSON, json);
+		String credential = Credentials.basic(USERNAME, PASSWORD);
+		Request request = new Request.Builder()
+				.url(BASE_URL + path)
+				.header("Authorization", credential)
+				.put(body)
+				.build();
+		try {
+			Response response = client.newCall(request).execute();
+			return responseHandler.handle(response);
+		} catch (IOException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		} catch (ResponseHandlerException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		}
+	}
+	
+	public static <T> T doDelete(String path, ResponseHandler<T> responseHandler) throws ExecuteException {
+		OkHttpClient client = new OkHttpClient();
+		String credential = Credentials.basic(USERNAME, PASSWORD);
+		Request request = new Request.Builder()
+				.url(BASE_URL + path)
+				.header("Authorization", credential)
+				.delete()
+				.build();
+		try {
+			Response response = client.newCall(request).execute();
+			return responseHandler.handle(response);
+		} catch (IOException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		} catch (ResponseHandlerException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		}
+	}
 }
