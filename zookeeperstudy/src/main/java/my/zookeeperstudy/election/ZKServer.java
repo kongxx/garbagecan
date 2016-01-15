@@ -13,6 +13,7 @@ public class ZKServer {
 	protected String id = null;
 	protected String dataDir = null;
 	protected String clientPort = null;
+	protected String path = "/myapp_leader";
 
 	public void startServer() {
 		new Thread(new Runnable() {
@@ -54,13 +55,13 @@ public class ZKServer {
 		while (true) {
 			byte[] leader = null;
 			try {
-				leader = zk.getData("/myapp_leader", true, null);
+				leader = zk.getData(path, true, null);
 			} catch(Exception e) {
 				System.out.println("The leader is null.");
 			}
 			if (leader == null) {
 				try {
-					zk.create("/myapp_leader", this.id.getBytes(),
+					zk.create(path, this.id.getBytes(),
 							ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 				} catch(Exception e) {
 					// ignore me
