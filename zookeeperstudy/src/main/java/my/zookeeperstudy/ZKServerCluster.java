@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.zookeeper.server.ServerConfig;
 import org.apache.zookeeper.server.ZooKeeperServerMain;
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
+import org.apache.zookeeper.server.quorum.QuorumPeerMain;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -36,10 +37,8 @@ public class ZKServerCluster {
 					QuorumPeerConfig quorumConfig = new QuorumPeerConfig();
 					quorumConfig.parseProperties(props);
 
-					final ZooKeeperServerMain zkServer = new ZooKeeperServerMain();
-					final ServerConfig config = new ServerConfig();
-					config.readFrom(quorumConfig);
-					zkServer.runFromConfig(config);
+					QuorumPeerMain quorumPeerMain = new QuorumPeerMain();
+					quorumPeerMain.runFromConfig(quorumConfig);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

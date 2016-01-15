@@ -5,7 +5,7 @@ import org.apache.zookeeper.*;
 import java.util.List;
 
 public class Test {
-	private static final String HOST = "9.111.254.55";
+	private static final String HOST = "localhost";
 	private static final String PORT = "2181";
 
 	public static void main(String[] args) throws Exception {
@@ -34,6 +34,8 @@ public class Test {
 		}
 
 		zk.delete("/myApps",-1);
+
+		System.out.println(zk.getState());
 
 		zk.close();
 	}

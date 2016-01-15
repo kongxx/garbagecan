@@ -23,7 +23,7 @@ public class Config implements Watcher {
 		}
 	}
 
-	public void setConfig(String key, String value) throws InterruptedException, KeeperException {
+	public void set(String key, String value) throws InterruptedException, KeeperException {
 		String path = basePath + "/" + key;
 		if (zk.exists(path, this) == null) {
 			zk.create(path, value.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
@@ -32,7 +32,7 @@ public class Config implements Watcher {
 		}
 	}
 
-	public String getConfig(String key) throws InterruptedException, KeeperException {
+	public String get(String key) throws InterruptedException, KeeperException {
 		String path = basePath + "/" + key;
 		if (zk.exists(path, this) != null) {
 			byte[] data = zk.getData(path, this, null);
@@ -46,7 +46,7 @@ public class Config implements Watcher {
 		List<String> children = zk.getChildren(basePath, false);
 		Collections.sort(children);
 		for (String child : children) {
-			System.out.println(child + ": " + getConfig(child));
+			System.out.println(child + ": " + get(child));
 		}
 		System.out.println("----- end -----");
 	}
