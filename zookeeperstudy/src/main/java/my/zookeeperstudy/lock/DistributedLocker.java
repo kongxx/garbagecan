@@ -17,9 +17,9 @@ public class DistributedLocker {
 		this.lockName = lockName;
 	}
 
-	public void lock() throws KeeperException, InterruptedException {
+	public void getLock() throws KeeperException, InterruptedException {
 		lockPath = zk.create(lockBasePath + "/" + lockName, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-		System.out.println("lock path: " + lockPath);
+		System.out.println("getLock path: " + lockPath);
 		final Object lock = new Object();
 		synchronized (lock) {
 			while (true) {
@@ -32,7 +32,7 @@ public class DistributedLocker {
 					}
 				});
 				Collections.sort(nodes);
-
+				System.out.println(nodes);
 				if (lockPath.endsWith(nodes.get(0))) {
 					return;
 				} else {
@@ -42,7 +42,7 @@ public class DistributedLocker {
 		}
 	}
 
-	public void unlock() throws KeeperException, InterruptedException {
+	public void releaseLock() throws KeeperException, InterruptedException {
 		zk.delete(lockPath, -1);
 		lockPath = null;
 	}

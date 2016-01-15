@@ -1,4 +1,4 @@
-package my.zookeeperstudy.election;
+package my.zookeeperstudy;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.zookeeper.*;
@@ -14,6 +14,12 @@ public class ZKServer {
 	protected String dataDir = null;
 	protected String clientPort = null;
 	protected String path = "/myapp_leader";
+
+	public ZKServer(String id, String dataDir, String clientPort) {
+		this.id = id;
+		this.dataDir = dataDir;
+		this.clientPort = clientPort;
+	}
 
 	public void startServer() {
 		new Thread(new Runnable() {
