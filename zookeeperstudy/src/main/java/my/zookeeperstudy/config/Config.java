@@ -41,7 +41,7 @@ public class Config implements Watcher {
 		return null;
 	}
 
-	public void displayConfig() throws InterruptedException, KeeperException {
+	public void printConfig() throws InterruptedException, KeeperException {
 		System.out.println("----- begin -----");
 		List<String> children = zk.getChildren(basePath, false);
 		Collections.sort(children);
@@ -68,7 +68,7 @@ public class Config implements Watcher {
 		if (event.getType() == Event.EventType.NodeDataChanged ||
 				event.getType() == Event.EventType.NodeChildrenChanged) {
 			try {
-				displayConfig();
+				printConfig();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (KeeperException e) {
