@@ -29,4 +29,16 @@ ln -s libclntsh.so.11.1 libclntsh.so
 pip install cx_Oracle
 ```
 
-如果顺利，就安装完成了。
+## 测试
+``` python
+import cx_Oracle
+
+conn = cx_Oracle.connect('jhinno/jhinno@192.168.0.188/jhinno')  
+cursor = conn.cursor ()
+cursor.execute ("select sysdate from dual")
+row = cursor.fetchone ()
+print row
+
+cursor.close ()
+conn.close ()
+```
