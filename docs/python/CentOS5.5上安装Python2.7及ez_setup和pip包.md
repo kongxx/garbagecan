@@ -2,7 +2,7 @@
 
 ## 下载
 
-首先重Python官方下载源码包[下载](https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz)
+首先从Python官方下载源码包[下载](https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz)
 
 ## 编译安装
 
