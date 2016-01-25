@@ -20,6 +20,12 @@
 └── xstreams.jar
 ```
 
+## 设置环境变量
+```bash
+LD_LIBRARY_PATH=/appstore/3rd_party/oracle/instantclient_11_2:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+```
+
 ## 测试程序
 
 创建一个目录myapp，在其下新建一个test.py文件，内容如下：
@@ -27,7 +33,7 @@
 ``` python
 import cx_Oracle
 
-conn = cx_Oracle.connect('jhinno/jhinno@192.168.0.188/jhinno')  
+conn = cx_Oracle.connect('jhinno/jhinno@192.168.0.188/jhinno')
 cursor = conn.cursor ()
 cursor.execute ("select sysdate from dual")
 row = cursor.fetchone ()
@@ -46,7 +52,6 @@ a = Analysis(['test.py'],
              hiddenimports=[],
              hookspath=None,
              runtime_hooks=None)
-a.binaries = a.binaries + [('libociicus.so', '/opt/instantclient_11_2/libociicus.so','BINARY')]
 pyz = PYZ(a.pure)
 exe = EXE(pyz,
           a.scripts,
