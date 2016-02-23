@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.squareup.okhttp.Credentials;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -11,7 +12,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 public class HttpUtils {
-	private static final String BASE_URL = "http://192.168.145.100:8000";
+	private static final String BASE_URL = "http://localhost:8000";
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "Letmein";
 	
@@ -89,6 +90,31 @@ public class HttpUtils {
 				.header("Authorization", credential)
 				.delete()
 				.build();
+		try {
+			Response response = client.newCall(request).execute();
+			return responseHandler.handle(response);
+		} catch (IOException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		} catch (ResponseHandlerException e) {
+			throw new ExecuteException(e.getMessage(), e);
+		}
+	}
+	
+	public static <T> T doDelete(String path, Map<String, Object> params, ResponseHandler<T> responseHandler) throws ExecuteException {
+		OkHttpClient client = new OkHttpClient();
+		String credential = Credentials.basic(USERNAME, PASSWORD);
+		Request.Builder builder = new Request.Builder();
+		builder = builder.url(BASE_URL + path);
+		builder = builder.header("Authorization", credential);
+		FormEncodingBuilder formBuilder = new com.squareup.okhttp.FormEncodingBuilder();
+		if (params != null) {
+			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				formBuilder.add(entry.getKey(), String.valueOf(entry.getValue()));
+			}
+		}
+		RequestBody body = formBuilder.build();
+		builder.delete(body);
+		Request request = builder.build();
 		try {
 			Response response = client.newCall(request).execute();
 			return responseHandler.handle(response);

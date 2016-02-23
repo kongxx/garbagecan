@@ -1,11 +1,9 @@
 package my.httpstudy.okhttp;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.squareup.okhttp.Credentials;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Request.Builder;
 import com.squareup.okhttp.Response;
 
 public class Test {
@@ -14,6 +12,7 @@ public class Test {
 //		testPost();
 //		testPut();
 //		testDelete();
+		
 	}
 	
 	private static void testGet() throws Exception {
@@ -97,5 +96,24 @@ public class Test {
 				}
 			}
 		});
+		
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params.put("article", 1);
+//		params.put("user", 2);
+//		HttpUtils.doDelete("/articles/api/favorites/0/", params, new ResponseHandler<Object>() {
+//			@Override
+//			public Object handle(Response response) throws ResponseHandlerException {
+//				System.out.println(response.isSuccessful());
+//				try {
+//					System.out.println(response.code());
+//					String result = response.body().string();
+//					System.out.println("===" + result);
+//					return result;
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//					return null;
+//				}
+//			}
+//		});
 	}
 }
