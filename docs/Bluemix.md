@@ -15,6 +15,16 @@ https://cli.run.pivotal.io/stable?release=redhat64&source=github
 sudo yum install cf-cli-installer_6.14.0_x86-64.rpm
 ```
 
+## 安装Docker
+
+## 安装IC Plugin
+
+``` bash
+cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
+```
+
+安装后可以使用 “cf plugins” 来查看
+
 ## 设置 namespace
 要使用 IBM Bluemix 的容器，首先必须要创建一个namespace来作为用户的容器仓库
 ``` bash
