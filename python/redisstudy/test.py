@@ -9,7 +9,7 @@ def test_getset():
     redis = RedisUtils().get_connection()
     assert redis.set("mykey", "myvalue")
     assert redis.get("mykey") == "myvalue"
-    assert redis.get("nokey") == None
+    assert redis.get("nokey") is None
     RedisUtils().release_connection(redis)
 
 
