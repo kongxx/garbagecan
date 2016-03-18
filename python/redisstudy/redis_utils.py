@@ -7,7 +7,7 @@ from singleton import singleton
 
 @singleton
 class RedisConfig(object):
-    host = '192.168.0.41'
+    host = '192.168.0.88'
     port = 6379
     db = 0
     max_connections = 10
@@ -19,11 +19,6 @@ class RedisConfig(object):
 
 @singleton
 class RedisUtils(object):
-
-    JOBS_KEY_PREFIX = 'JOBS_'
-    JOBS_SCHEDULED_KEY_PREFIX = 'JOBS_SCHEDULED_'
-    JOBS_STATUS_KEY = 'JOBS_STATUS_MAP'
-    JOBS_RUSAGE_KEY = 'JOBS_RUSAGE_MAP'
 
     def __init__(self):
         self._pool = None
