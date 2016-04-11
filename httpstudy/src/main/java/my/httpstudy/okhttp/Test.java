@@ -12,7 +12,7 @@ public class Test {
 //		testPost();
 //		testPut();
 //		testDelete();
-		
+		testPatch();
 	}
 	
 	private static void testGet() throws Exception {
@@ -58,6 +58,31 @@ public class Test {
 	private static void testPut() throws Exception {
 		String json = "{\"title\": \"abc\", \"create_user\":1,\"summary\":\"111summarysummarysummarysummary\"}";
 		HttpUtils.doPut("/articles/api/articles/20/", json, new ResponseHandler<Object>() {
+			@Override
+			public Object handle(Response response) throws ResponseHandlerException {
+				System.out.println(response.isSuccessful());
+				if (response.isSuccessful()) {
+					try {
+						String result = response.body().string();
+						System.out.println(result);
+						return result;
+					} catch (IOException e) {
+						e.printStackTrace();
+						return null;
+					}
+				} else {
+					return null;
+				}
+			}
+		});
+	}
+	
+	private static void testPatch() throws Exception {
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		int[] ids = {10, 11};
+//		params.put("ids", ids);
+		String json = "{\"ids\": [10, 11]}";
+		HttpUtils.doPatch("/notifications/api/changestatus/", json, new ResponseHandler<Object>() {
 			@Override
 			public Object handle(Response response) throws ResponseHandlerException {
 				System.out.println(response.isSuccessful());
