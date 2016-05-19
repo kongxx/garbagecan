@@ -5,9 +5,9 @@ import org.apache.zookeeper.*;
 import java.io.IOException;
 
 public class Test {
-	private static final String host1 = "9.111.254.55:2181";
-	private static final String host2 = "9.111.254.59:2181";
-	private static final String host3 = "9.111.254.91:2181";
+	private static final String host1 = "localhost:2181";
+	private static final String host2 = "localhost:2182";
+	private static final String host3 = "localhost:2183";
 
 	public static void main(String[] args) throws Exception {
 		final ZooKeeper zk = new ZooKeeper(host1, 10000, null);
