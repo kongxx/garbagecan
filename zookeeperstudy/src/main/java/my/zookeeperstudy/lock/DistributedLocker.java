@@ -18,6 +18,9 @@ public class DistributedLocker {
 	}
 
 	public void getLock() throws KeeperException, InterruptedException {
+		if (zk.exists(lockBasePath, true) == null) {
+			zk.create(lockBasePath, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+		}
 		lockPath = zk.create(lockBasePath + "/" + lockName, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
 		System.out.println("getLock path: " + lockPath);
 		final Object lock = new Object();
