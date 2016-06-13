@@ -12,10 +12,8 @@ def print_help():
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         pattern = re.compile('^(\d*)([M|G]B)$')
-        print sys.argv[1].upper()
         match = pattern.match(sys.argv[1].upper())
         if match:
-            print '--'
             num = int(match.group(1))
             unit = match.group(2)
             if unit == 'MB':
