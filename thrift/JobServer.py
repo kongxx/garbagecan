@@ -2,25 +2,25 @@
 import sys, glob
 sys.path.append('gen-py')
 
-from greeting import GreetingService
-from greeting.ttypes import *
+from job import JobService
+from job.ttypes import *
 
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 from thrift.server import TServer
 
-class GreetingServiceHandler:
+class JobServiceHandler:
     def __init__(self):
-        pass
+        self.jobs = []
+        for i in range(0, 100000):
+            self.jobs.append(Job(id=str(i), name='job_' + str(i), queue='normal', user='kongxx', cmd='sleep 1'))
 
-    def hello(self, name):
-        msg = 'Hello ' + name + '!'
-        print msg
-        return msg
+    def getJobs(self, size):
+        return self.jobs[0:size]
 
-handler = GreetingServiceHandler()
-processor = GreetingService.Processor(handler)
+handler = JobServiceHandler()
+processor = JobService.Processor(handler)
 transport = TSocket.TServerSocket(port=9090)
 tfactory = TTransport.TBufferedTransportFactory()
 pfactory = TBinaryProtocol.TBinaryProtocolFactory()
