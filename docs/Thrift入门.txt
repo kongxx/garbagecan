@@ -1,7 +1,8 @@
 # Thrift入门
 
 ## 介绍
-今天工作需要，看了一下Apache的Thrift，Thrift是Facebook的核心技术框架之一，使不同语言开发的系统可以通过该框架进行通信。开发者使用thrift提供的格式来定义数据和服务脚本。thrift可以通过定义的脚本自动生成不同语言的代码以支持不同语言之间的通信。thrift支持多种数据通信协议，比如xml, json, binnary等。
+
+今天工作需要，看了一下Apache的Thrift，Thrift是Facebook的核心技术框架之一，使不同语言开发的系统可以通过该框架进行通信。开发者使用thrift提供的格式来定义数据和服务脚本。thrift可以通过定义的脚本自动生成不同语言的代码以支持不同语言之间的通信。thrift支持多种数据通信协议，比如json, binnary等。
 
 下面写了个小程序，由于只是测试用，暂时不需要跨语言，所以就使用python来实现。
 
@@ -52,7 +53,7 @@ from thrift.server import TServer
 
 class GreetingServiceHandler:
     def __init__(self):
-        self.log = {}
+        pass
 
     def hello(self, name):
         msg = 'Hello ' + name + '!'
