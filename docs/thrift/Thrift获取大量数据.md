@@ -174,13 +174,13 @@ class JobServiceHandler:
             self.manager.create_instance(operation_id)
             return operation_id
         except Exception as e:
-            raise JobServiceException(code=1, message='Unknown error.')
+            raise JobServiceException(message=e.message)
 
     def close(self, operation_id):
         try:
             self.manager.drop_instance(operation_id)
         except Exception as e:
-            raise JobServiceException(code=1, message='Unknown error.')
+            raise JobServiceException(message=e.message)
 
     def getJobs(self, operation_id, offset, size):
         instance = self.manager.get_instance(operation_id)
@@ -188,9 +188,9 @@ class JobServiceHandler:
             try:
                 return instance.get_jobs(offset, size)
             except Exception as e:
-                raise JobServiceException(code=1, message='Unknown error.')
+                raise JobServiceException(message=e.message)
         else:
-            raise JobServiceException(code=1, message='Invalid operation id.')
+            raise JobServiceException(message='Invalid operation id.')
 
 class JobServiceInstance:
     def __init__(self):
