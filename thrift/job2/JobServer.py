@@ -26,7 +26,6 @@ class JobServiceHandler:
         try:
             self.manager.drop_instance(operation_id)
         except Exception as e:
-            print e
             raise JobServiceException(code=1, message='Unknown error.')
 
     def getJobs(self, operation_id, offset, size):
