@@ -19,7 +19,7 @@ try:
     transport.open()
 
     offset = 0
-    size = 1000
+    size = 100
     total = 0
 
     operation_id = client.open()
@@ -32,7 +32,7 @@ try:
             total += len(jobs)
             for job in jobs:
                 # print job
-                attrs = json.loads(job.json)
+                attrs = json.loads(job.attrs)
                 # print 'attr length: %s' % len(attrs)
         print 'total: %s' % total
     finally:

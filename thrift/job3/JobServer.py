@@ -77,12 +77,12 @@ class JobServiceInstanceManager:
         jobs = []
         attrs = dict()
         for i in range(0, attr_num):
-            attrs.update({'attr' + str(i): 'long long long string ... ' + str(i)})
+            attrs.update({'attr_' + str(i): 'long long long string ... ' + str(i)})
 
         for i in range(0, job_num):
             job = Job(id=str(i), name='job_' + str(i), queue='normal',
                         user='kongxx', cmd='sleep 1',
-                        json=json.dumps(attrs))
+                        attrs=json.dumps(attrs))
             jobs.append(job)
         print 'prepare jobs end'
         return jobs

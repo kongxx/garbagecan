@@ -5,7 +5,7 @@ struct Job {
     3: string queue,
     4: string user,
     5: string cmd,
-    6: string json
+    6: string attrs
 }
 
 exception JobServiceException {
