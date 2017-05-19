@@ -56,7 +56,7 @@ myapp
   "scripts": {
     "electron": "webpack --target electron-renderer && electron .",
     "web": "webpack --target web && webpack-dev-server --target web --hot --inline",
-    "packager": "webpack && electron-packager . --platform=linux --electron-version=1.6.6  --overwrite"
+    "packager": "webpack --target electron-renderer && electron-packager . --platform=linux --electron-version=1.6.6  --overwrite"
   },
   "author": "",
   "license": "ISC",
