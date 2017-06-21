@@ -80,3 +80,12 @@ $ bin/connect-standalone.sh config/connect-standalone.properties config/connect-
 ```
 
 运行后，另开一个终端来观察 test.sink.txt 文件中的内容，可以看到文件中的内容会不停的增加。
+
+## 删除 Topic
+
+要删除 topic，可以使用下面的命令
+``` shell
+$ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic mytopic
+```
+
+但是运行命令后，topic并没有被删除，使用 “bin/kafka-topics.sh --list --zookeeper localhost:2181” 仍然可以查到。此时我们需要修改config/server.properties文件中的 “delete.topic.enable=true” 来打开这个功能。此时我们再执行上面的 --delete 操作，即可删除topic了。
