@@ -148,6 +148,20 @@ $ sudo docker service ps mynginx
 ID                         NAME       IMAGE  NODE     DESIRED STATE  CURRENT STATE           ERROR
 1crmc5ecsjoci8xavxzbnbks3  mynginx.1  nginx  bd0      Running        Running 23 seconds ago
 divhrq89xhxka8bvb8r9zqqhz  mynginx.2  nginx  bd2      Running        Running 20 seconds ago
+
+$ sudo docker service inspect mynginx
+...
+"VirtualIPs": [
+    {
+        "NetworkID": "1zzlk9hpwyqyocloxy9j9vct7",
+        "Addr": "10.255.0.6/16"
+    },
+    {
+        "NetworkID": "a04evrfrr4cvnbvrummzvg0mn",
+        "Addr": "10.0.0.2/24"
+    }
+]
+...
 ```
 
 在bd0上查看
