@@ -1,6 +1,12 @@
 # Docker使用Swarm组建集群
 
-首先，我使用了三个机器来组建一个Swarm集群
+Docker 使用 Swarm 可以很方便的在多个主机上创建容器集群，并且容器之间可以跨主机网络通信。
+
+Swarm 的集群分为 Manager 节点和 Worker 节点。
+
+Swarm 中使用 Service 来创建/管理使用相同镜像的多个容器，多个容器同时对外提供服务，多个容器之间负载均衡。每个 Service 有一个浮动IP（VIP），各个容器还有自己的物理IP。创建基于 Swarm 的 Overlay 网络，将 Service 挂载到此网络上。然后 Service 中的各个容器便可以通过 Service 名称和 IP 地址实现网络互通。
+
+下面使用了三个机器来组建一个Swarm集群
 
 bd0    192.168.0.109
 bd1    192.168.0.192
