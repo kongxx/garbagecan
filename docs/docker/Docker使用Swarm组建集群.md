@@ -137,7 +137,7 @@ $ sudo docker pull nginx
 ### 创建服务
 
 ``` shell
-$ sudo docker service create --replicas 2 --name mynginx -p 8000:80 --network=myswarm nginx
+$ sudo docker service create --replicas 2 --name mynginx --publish 8000:80 --network=myswarm nginx
 5xrm96xveqw5gq63srts1rbhw
 ```
 
