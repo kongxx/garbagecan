@@ -107,5 +107,3 @@ $ curl -XGET http://192.168.0.109:5000/v2/_catalog
 $ curl -XGET http://192.168.0.109:5000/v2/kongxx/mybusybox/tags/list
 {"name":"kongxx/mybusybox","tags":["latest"]}
 ```
-
-最后，有一个问题不知道应该怎么解决，就是怎样删除私有仓库里镜像。
