@@ -1,4 +1,4 @@
-package my.ignitestudy;
+package my.ignitestudy.datagrid;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
