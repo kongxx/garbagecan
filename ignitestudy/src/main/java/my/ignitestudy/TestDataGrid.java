@@ -11,10 +11,9 @@ import org.apache.ignite.transactions.Transaction;
 import java.util.Arrays;
 
 public class TestDataGrid {
-	public static void main( String[] args ) {
-//		testGetPut();
-//		testAtomOperation();
-		TestTransaction();
+	public static void main( String[] args ) throws Exception {
+		testGetPut();
+		testAtomOperation();
 	}
 
 	private static Ignite getIgnite() {
@@ -64,38 +63,4 @@ public class TestDataGrid {
 		success = cache.remove("Hello", 1);
 		System.out.println("World remove: " + success);
 	}
-
-	private static void TestTransaction() {
-		final Ignite ignite = getIgnite();
-		final IgniteCache<String, Integer> cache = getIgnite().getOrCreateCache("myCache");
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Begin Transaction");
-				try (Transaction tx = ignite.transactions().txStart()) {
-					Integer hello = cache.get("MyKey");
-
-					if (hello == 1) {
-						cache.put("Hello", 11);
-					}
-
-					cache.put("World", 22);
-
-					tx.commit();
-				}
-				System.out.println("End Transaction");
-			}
-		}).start();
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		}).start();
-
-
-	}
-
 }
