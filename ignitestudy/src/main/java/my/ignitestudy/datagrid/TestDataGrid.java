@@ -12,8 +12,9 @@ import java.util.Arrays;
 
 public class TestDataGrid {
 	public static void main( String[] args ) throws Exception {
-		testGetPut();
-		testAtomOperation();
+		Ignite ignite = getIgnite();
+		testGetPut(ignite);
+		testAtomOperation(ignite);
 	}
 
 	private static Ignite getIgnite() {
@@ -29,8 +30,8 @@ public class TestDataGrid {
 		return ignite;
 	}
 
-	private static void testGetPut() {
-		IgniteCache<String, String> cache = getIgnite().getOrCreateCache("myCache");
+	private static void testGetPut(Ignite ignite) {
+		IgniteCache<String, String> cache = ignite.getOrCreateCache("myCache");
 
 		for (int i = 0; i < 10; i++) {
 			cache.put("mykey_" + i, "myvalue_" + i);
@@ -42,25 +43,25 @@ public class TestDataGrid {
 		}
 	}
 
-	private static void testAtomOperation() {
-		IgniteCache<String, Integer> cache = getIgnite().getOrCreateCache("myCache");
+	private static void testAtomOperation(Ignite ignite) {
+		IgniteCache<String, Integer> cache = ignite.getOrCreateCache("myCache");
 
-		Integer oldValue = cache.getAndPutIfAbsent("Hello", 11);
-		System.out.println("Hello: " + oldValue);
+		Integer oldValue = cache.getAndPutIfAbsent("MyKey", 11);
+		System.out.println("MyKey: " + oldValue);
 
-		boolean success = cache.putIfAbsent("World", 22);
-		System.out.println("World: " + success);
+		boolean success = cache.putIfAbsent("MyKey", 22);
+		System.out.println("MyKey: " + success);
 
-		oldValue = cache.getAndReplace("Hello", 11);
-		System.out.println("Hello replace: " + oldValue);
+		oldValue = cache.getAndReplace("MyKey", 11);
+		System.out.println("MyKey replace: " + oldValue);
 
-		success = cache.replace("World", 22);
-		System.out.println("World replace: " + success);
+		success = cache.replace("MyKey", 22);
+		System.out.println("MyKey replace: " + success);
 
-		success = cache.replace("World", 2, 22);
-		System.out.println("World replace: " + success);
+		success = cache.replace("MyKey", 2, 22);
+		System.out.println("MyKey replace: " + success);
 
-		success = cache.remove("Hello", 1);
-		System.out.println("World remove: " + success);
+		success = cache.remove("MyKey", 1);
+		System.out.println("MyKey remove: " + success);
 	}
 }
