@@ -35,7 +35,6 @@ public class DistributedLockExample {
 	private static void test() throws Exception {
 		CacheConfiguration cacheCfg = new CacheConfiguration();
 		cacheCfg.setName("default");
-		cacheCfg.setAtomicityMode(CacheAtomicityMode.TRANSACTIONAL);
 		cacheCfg.setBackups(1);
 		IgniteCache<String, String> cache = getIgnite().getOrCreateCache(cacheCfg);
 
