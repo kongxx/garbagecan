@@ -31,6 +31,7 @@ glog-devel
 ## 安装依赖的 Python 库
 
 ``` shell
+$ sudo pip install --upgrade pip
 $ sudo pip install \
 flask \
 future \
