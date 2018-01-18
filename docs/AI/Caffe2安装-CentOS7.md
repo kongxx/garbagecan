@@ -77,6 +77,7 @@ $ python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || ec
 ``` shell
 $ cd build
 $ python -m caffe2.python.operator_test.relu_op_test
+$ python -m caffe2.python.examples.resnet50_trainer --train_data null --use_cpu 
 ```
 
 ## 问题
