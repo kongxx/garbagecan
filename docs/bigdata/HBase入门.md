@@ -163,7 +163,7 @@ $ bin/local-master-backup.sh start 2
 $ bin/local-master-backup.sh start 3
 ```
 
-### 启动 HBase 伪分布式集群的 RegionServer
+### 启动 HBase 伪分布式集群的区域服务器
 
 ``` shell
 $ bin/local-regionservers.sh start 2
@@ -191,7 +191,7 @@ $ bin/stop-hbase.sh
 这里准备了三台服务器bd1，bd2和bd3来演示 HBase 的分布式集群模式。其中：
 - bd1 作为主master
 - bd2 作为备份master
-- bd2,bd3 作为 RegionServer
+- bd2,bd3 作为区域服务器
 
 ### 配置 SSH 免密码登陆
 
@@ -232,11 +232,15 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub <目标机器>
 
 ### 创建 conf/backup-masters
 
+定义备份master节点
+
 ``` shell
 bd2
 ```
 
 ### 配置 conf/regionservers
+
+定义区域服务器节点
 
 ``` shell
 bd2
