@@ -2,7 +2,8 @@
 
 ## 安装依赖包
 ``` shell
-sudo yum install protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel hdf5-devel
+sudo yum install epel-release
+sudo yum install gcc-c++ protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel hdf5-devel
 sudo yum install gflags-devel glog-devel lmdb-devel
 sudo yum install openblas-devel
 ```
