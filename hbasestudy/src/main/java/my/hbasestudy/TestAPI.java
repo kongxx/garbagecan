@@ -28,6 +28,8 @@ public class TestAPI {
 		Configuration config = HBaseConfiguration.create();
 		Connection connection = ConnectionFactory.createConnection(config);
 
+		long t1 = System.currentTimeMillis();
+
 		TestAPI t = new TestAPI(connection);
 
 		t.listTable();
@@ -42,6 +44,9 @@ public class TestAPI {
 		t.getRows();
 
 		t.deleteTable();
+
+		long t2 = System.currentTimeMillis();
+		System.out.println("Time: " + (t2 - t1));
 
 		connection.close();
 	}
@@ -130,11 +135,15 @@ public class TestAPI {
 
 	private void getRow(Result result) {
 		if (Bytes.toString(result.getRow()) != null) {
-			System.out.println(Bytes.toString(result.getRow()));
-			System.out.println("  base:username=" + Bytes.toString(result.getValue(Bytes.toBytes("base"), Bytes.toBytes("username"))));
-			System.out.println("  base:password=" + Bytes.toString(result.getValue(Bytes.toBytes("base"), Bytes.toBytes("password"))));
-			System.out.println("  address:home=" + Bytes.toString(result.getValue(Bytes.toBytes("address"), Bytes.toBytes("home"))));
-			System.out.println("  address:office=" + Bytes.toString(result.getValue(Bytes.toBytes("address"), Bytes.toBytes("office"))));
+			StringBuilder sb = new StringBuilder();
+			sb.append(Bytes.toString(result.getRow()));
+			sb.append("[");
+			sb.append("base:username=" + Bytes.toString(result.getValue(Bytes.toBytes("base"), Bytes.toBytes("username"))));
+			sb.append(", base:password=" + Bytes.toString(result.getValue(Bytes.toBytes("base"), Bytes.toBytes("password"))));
+			sb.append(", address:home=" + Bytes.toString(result.getValue(Bytes.toBytes("address"), Bytes.toBytes("home"))));
+			sb.append(", address:office=" + Bytes.toString(result.getValue(Bytes.toBytes("address"), Bytes.toBytes("office"))));
+			sb.append("]");
+			System.out.println(sb.toString());
 		}
 	}
 
@@ -145,7 +154,6 @@ public class TestAPI {
 		Iterator<Result> it = resultScanner.iterator();
 		while (it.hasNext()) {
 			Result result = it.next();
-			getRow(result);
 			Delete delete = new Delete(result.getRow());
 			table.delete(delete);
 		}
