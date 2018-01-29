@@ -9,7 +9,7 @@
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>bd1,bd2,fanbin1</value>
+        <value>bd1</value>
     </property>
     <property>
         <name>hbase.cluster.distributed</name>
