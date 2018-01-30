@@ -1,3 +1,48 @@
+# HBase客户端API-分页过滤器
+
+前一篇博客说了一下 HBase 的一些过滤器，今天看看 HBase 的分页过滤器。
+
+在 HBase 中分页过滤是通过 PageFilter 来实现的，在创建这个参数的时候需要设置一个pageSize参数，通过这个参数来控制每页返回的行数，并且在每次查询时需要指定本次查询的起始行。
+
+这里有一点需要注意，HBase中行键的排序是按字典顺序排列的，因此返回的结果也是按此顺序排列。
+
+下面看一下分页过滤的代码片段
+
+``` java
+Filter filter = new PageFilter(10);
+Table table = connection.getTable(TableName.valueOf(TABLE_NAME));
+
+byte[] lastRow = null;
+while(true) {
+	Scan scan = new Scan();
+	scan.setFilter(filter);
+	if (lastRow != null) {
+		scan.withStartRow(lastRow, false);
+	}
+	ResultScanner resultScanner = table.getScanner(scan);
+	Iterator<Result> it = resultScanner.iterator();
+	int count = 0;
+	while (it.hasNext()) {
+		Result result = it.next();
+		printRow(result);
+		lastRow = result.getRow();
+		count ++;
+	}
+	resultScanner.close();
+	if (count == 0) {
+		break;
+	}
+}
+table.close();
+```
+
+- 首先需要创建一个PageFilter对象，并设置每页10行。
+- 然后通过Scan.withStartRow()来设置起始行，对于第一次查询，可以不用设置。其中第二个参数是用来标识是否需要包括指定起始行。
+- 执行查询，对于每次查询设置了一个计数，当计数为 0 时，表示本次查询没有返回结果，说明查询遍历完成，此时跳出循环。
+
+下面是可运行完整代码
+
+``` java
 package my.hbasestudy;
 
 import org.apache.hadoop.conf.Configuration;
@@ -42,8 +87,8 @@ public class TestPageFilter {
 	}
 
 	private void test() throws IOException, DeserializationException {
-//		createTable();
-//		prepare();
+		createTable();
+		prepare();
 
 		Filter filter = new PageFilter(10);
 		Table table = connection.getTable(TableName.valueOf(TABLE_NAME));
@@ -71,7 +116,7 @@ public class TestPageFilter {
 		}
 		table.close();
 
-//		deleteTable();
+		deleteTable();
 	}
 
 	private void createTable() throws IOException {
@@ -131,13 +176,6 @@ public class TestPageFilter {
 		while (it.hasNext()) {
 			Result result = it.next();
 			printRow(result);
-//			if (filter instanceof RowFilter) {
-//				printRow(result);
-//			} else {
-//				Get get = new Get(result.getRow());
-//				result = table.get(get);
-//				printRow(result);
-//			}
 		}
 		resultScanner.close();
 		table.close();
@@ -157,3 +195,5 @@ public class TestPageFilter {
 		}
 	}
 }
+
+```
