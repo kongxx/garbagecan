@@ -45,22 +45,30 @@ public class TestFilter {
 //		createTable();
 //		prepare();
 
-//		// Row Filter
-//		filter(new RowFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("row_2"))));
-//		filter(new RowFilter(CompareOperator.LESS_OR_EQUAL, new BinaryComparator(Bytes.toBytes("row_5"))));
-//		filter(new RowFilter(CompareOperator.EQUAL, new RegexStringComparator("row_*")));
-//
-//		// Family Filter
-//		filter(new FamilyFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("base"))));
-//		filter(new FamilyFilter(CompareOperator.EQUAL, new RegexStringComparator("address*")));
-//
-//		// Column Filter
-//		filter(new QualifierFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("username"))));
-//		filter(new QualifierFilter(CompareOperator.EQUAL, new RegexStringComparator("home*")));
+		System.out.println("---------- Row Filter ----------");
+		filter(new RowFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("row_2"))));
+		filter(new RowFilter(CompareOperator.LESS_OR_EQUAL, new BinaryComparator(Bytes.toBytes("row_5"))));
+		filter(new RowFilter(CompareOperator.EQUAL, new RegexStringComparator("row_*")));
 
-		// Value Filter
+		System.out.println("---------- Family Filter ----------");
+		filter(new FamilyFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("base"))));
+		filter(new FamilyFilter(CompareOperator.EQUAL, new RegexStringComparator("address*")));
+
+		System.out.println("---------- Column Filter ----------");
+		filter(new QualifierFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("username"))));
+		filter(new QualifierFilter(CompareOperator.EQUAL, new RegexStringComparator("home*")));
+
+		System.out.println("---------- Value Filter ----------");
 		filter(new ValueFilter(CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("user_0"))));
 		filter(new ValueFilter(CompareOperator.EQUAL, new RegexStringComparator("password_*")));
+
+		System.out.println("---------- Single Column Value Filter ----------");
+		filter(new SingleColumnValueFilter(Bytes.toBytes("base"), Bytes.toBytes("username"),
+				CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("user_0"))));
+
+		System.out.println("---------- Single Column Value Exclude Filter ----------");
+		filter(new SingleColumnValueExcludeFilter(Bytes.toBytes("base"), Bytes.toBytes("username"),
+				CompareOperator.EQUAL, new BinaryComparator(Bytes.toBytes("user_0"))));
 
 //		deleteTable();
 	}
@@ -114,7 +122,6 @@ public class TestFilter {
 	}
 
 	private void filter(Filter filter) throws IOException {
-		System.out.println("--------------------------------------------------");
 		Table table = connection.getTable(TableName.valueOf(TABLE_NAME));
 		Scan scan = new Scan();
 		scan.setFilter(filter);
@@ -122,13 +129,14 @@ public class TestFilter {
 		Iterator<Result> it = resultScanner.iterator();
 		while (it.hasNext()) {
 			Result result = it.next();
-			if (filter instanceof RowFilter) {
-				printRow(result);
-			} else {
-				Get get = new Get(result.getRow());
-				result = table.get(get);
-				printRow(result);
-			}
+			printRow(result);
+//			if (filter instanceof RowFilter) {
+//				printRow(result);
+//			} else {
+//				Get get = new Get(result.getRow());
+//				result = table.get(get);
+//				printRow(result);
+//			}
 		}
 		resultScanner.close();
 		table.close();
