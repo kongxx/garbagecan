@@ -101,11 +101,11 @@ OK
 
 此时，我们查看一下这些数据在 HDFS 上是怎样存储的，我在查看
 ``` shell
-$ ${HADOOP_HOME}/bin/hdfs dfs -ls /user/hive/warehouse/users
+hive> dfs -ls /user/hive/warehouse/users
 Found 1 items
 -rwxr-xr-x   2 jhadmin supergroup         54 2018-02-05 00:14 /user/hive/warehouse/users/users.dat
 
-$ ${HADOOP_HOME}/bin/hdfs dfs -cat /user/hive/warehouse/users/users.dat
+hive> dfs -cat /user/hive/warehouse/users/users.dat
 1,user1,password1
 2,user2,password2
 3,user3,password3
@@ -134,12 +134,12 @@ OK
 查看一下 HDFS 的文件信息，可以看到新添加了一个文件000000_0，其中保存着上面插入语句保存的数据。
 
 ``` shell
-$ ${HADOOP_HOME}/bin/hdfs dfs -ls /user/hive/warehouse/users
+hive> dfs -ls /user/hive/warehouse/users
 Found 2 items
 -rwxr-xr-x   2 jhadmin supergroup         22 2018-02-05 00:26 /user/hive/warehouse/users/000000_0
 -rwxr-xr-x   2 jhadmin supergroup         54 2018-02-05 00:14 /user/hive/warehouse/users/users.dat
 
-$ ${HADOOP_HOME}/bin/hdfs dfs -cat /user/hive/warehouse/users/000000_0
+hive> dfs -cat /user/hive/warehouse/users/000000_0
 6,username6,password6
 ```
 
