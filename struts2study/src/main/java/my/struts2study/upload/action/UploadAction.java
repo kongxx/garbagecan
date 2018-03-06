@@ -34,6 +34,7 @@ public class UploadAction extends ActionSupport {
 			}
 	)
 	public String toUpload() {
+		log.info("toUpload");
 		return SUCCESS;
 	}
 
@@ -44,6 +45,7 @@ public class UploadAction extends ActionSupport {
 			}
 	)
 	public String doUpload() {
+		log.info("doUpload");
 		log.info("user: " + user);
 		log.info("myFileFileName: " + myFileFileName);
 		log.info("myFileContentType: " + myFileContentType);
