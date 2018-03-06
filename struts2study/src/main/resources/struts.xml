@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.ui.templateDir" value="template" />
+    <constant name="struts.ui.templateSuffix" value="ftl" />
+    <constant name="struts.custom.i18n.resources" value="package" />
+    <constant name="struts.convention.result.path" value=""/>
+    <!-- Max file size in bytes (default: 10 MB)-->
+    <constant name="struts.multipart.maxSize" value="10485760"/>
+
+    <package name="mydefault" extends="struts-default">
+        <global-results>
+            <result name="error">/error/error.jsp</result>
+        </global-results>
+    </package>
+</struts>
