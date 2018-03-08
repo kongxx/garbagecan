@@ -262,3 +262,13 @@ $ cf push
 ``` shell
 $ curl http://cf-helloworld.bosh-lite.com
 ```
+
+## 参考
+
+- https://bosh.io/docs/terminology.html
+- http://mariash.github.io/learn-bosh/
+- https://docs.cloudfoundry.org/running/troubleshooting.html
+- https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-commands
+- https://banck.net/2017/03/deploying-cloud-foundry-virtualbox-using-bosh-cli-v2/
+- https://banck.net/2017/03/deploying-cloud-foundry-virtualbox-using-bosh-cli-v2/
+
