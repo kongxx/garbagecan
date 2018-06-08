@@ -37,3 +37,7 @@ schtasks /query /fo LIST /tn init
 ``` shell
 schtasks /run /tn init
 ```
+
+## 注意
+
+这里有个特别需要注意的地方，在 cmd 窗口中运行上面的命令的时候，记得先使用 “chcp 437” 切换一下 cmd 窗口的活动代码页编号，否则如果是中文操作系统可能会出错。
