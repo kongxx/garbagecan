@@ -64,6 +64,10 @@ hive> show tables;
 
 ``` shell
 hive> CREATE TABLE users(id int, username string, password string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+
+or
+
+hive> CREATE TABLE users(id int, username string, password string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
 ```
 
 ### 插入查询数据
