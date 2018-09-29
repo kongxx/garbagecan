@@ -50,5 +50,7 @@ User created.
 ## 赋予权限
 
 ``` sql
-SQL> grant dba to test;
+SQL> GRANT ALL PRIVILEGES TO test;
+
+SQL> GRANT DBA TO test;
 ```
