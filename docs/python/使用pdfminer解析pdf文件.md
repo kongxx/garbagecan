@@ -77,6 +77,78 @@ if __name__ == '__main__':
     pdf_utils = PDFUtils()
     print pdf_utils.pdf2txt(path)
 ```
+
+``` shell
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfpage import PDFPage, PDFTextExtractionNotAllowed
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import PDFPageAggregator
+from pdfminer.layout import LAParams
+import StringIO
+import codecs
+
+
+class PDFUtils():
+
+    def __init__(self):
+        pass
+
+    def pdf2txt_str(self, input_file):
+        return self.pdf2txt(input_file, output_file=None)
+
+    def pdf2txt_file(self, input_file, output_file):
+        self.pdf2txt(input_file, output_file)
+
+    def pdf2txt(self, input_file, output_file=None, remove_empty=True):
+        if output_file is None:
+            output = StringIO.StringIO()
+        else:
+            output = codecs.open(output_file, 'w', 'utf-8')
+
+        with open(input_file, 'rb') as f:
+            praser = PDFParser(f)
+
+            doc = PDFDocument(praser)
+
+            if not doc.is_extractable:
+                raise PDFTextExtractionNotAllowed
+
+            pdfrm = PDFResourceManager()
+
+            laparams = LAParams()
+
+            device = PDFPageAggregator(pdfrm, laparams=laparams)
+
+            interpreter = PDFPageInterpreter(pdfrm, device)
+
+            for page in PDFPage.create_pages(doc):
+                interpreter.process_page(page)
+                layout = device.get_result()
+                for x in layout:
+                    if hasattr(x, "get_text"):
+                        content = x.get_text()
+                        if remove_empty and len(content.strip()) == 0:
+                            continue
+                        output.write(content)
+
+        if output_file is None:
+            content = output.getvalue()
+            output.close()
+            return content
+        else:
+            output.close()
+
+
+if __name__ == '__main__':
+    path = u'/tmp/abc.pdf'
+    pdf_utils = PDFUtils()
+    print pdf_utils.pdf2txt_str(input_file)
+    pdf_utils.pdf2txt_file(input_file, '/tmp/abc.txt')
+```
+
 ## 参考
 
 > http://www.unixuser.org/~euske/python/pdfminer/index.html
