@@ -77,3 +77,6 @@ if __name__ == '__main__':
     pdf_utils = PDFUtils()
     print pdf_utils.pdf2txt(path)
 ```
+## 参考
+
+> http://www.unixuser.org/~euske/python/pdfminer/index.html
