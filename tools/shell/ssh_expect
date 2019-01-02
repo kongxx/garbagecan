@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+set hostname [lindex $argv 0]
+set user [lindex $argv 1]
+set passwd [lindex $argv 2]
+set timeout 30
+
+set force_conservative 1
+if {$force_conservative} {
+    set send_slow {128 .1}
+}
+spawn ssh -X $user@$hostname;
+expect {
+	"*continue connecting (yes/no)?" { send -s "yes\r"; exp_continue }
+	"*assword:" {
+		send -s "$passwd\r";
+	}
+}
+interact
+
