@@ -125,19 +125,19 @@ cd apache-phoenix-4.14.1-HBase-1.4-bin/bin
 ./sqlline.py
 
 # 创建一个表包括两个 column-family：A 和 B，每个 column-family 里包含两个 column
-0: jdbc:phoenix:> CREATE TABLE TEST (PK INTEGER PRIMARY KEY, A.A1 VARCHAR, A.A2 VARCHAR, B.B1 VARCHAR, B.B2 VARCHAR);
+0: jdbc:phoenix:> CREATE TABLE TEST (ID INTEGER PRIMARY KEY, A.A1 VARCHAR, A.A2 VARCHAR, B.B1 VARCHAR, B.B2 VARCHAR);
 No rows affected (1.506 seconds)
 
 # 写入数据
-0: jdbc:phoenix:> UPSERT INTO TEST (PK, A.A1, A.A2, B.B1, B.B2) VALUES (1, 'a11', 'a12', 'b11', 'b12');
+0: jdbc:phoenix:> UPSERT INTO TEST (ID, A.A1, A.A2, B.B1, B.B2) VALUES (1, 'a11', 'a12', 'b11', 'b12');
 1 row affected (0.15 seconds)
-0: jdbc:phoenix:> UPSERT INTO TEST (PK, A.A1, A.A2, B.B1, B.B2) VALUES (2, 'a21', 'a22', 'b21', 'b22');
+0: jdbc:phoenix:> UPSERT INTO TEST (ID, A.A1, A.A2, B.B1, B.B2) VALUES (2, 'a21', 'a22', 'b21', 'b22');
 1 row affected (0.015 seconds)
 
 # 查询数据
 0: jdbc:phoenix:> SELECT * FROM TEST;
 +-----+------+------+------+------+
-| PK  |  A1  |  A2  |  B1  |  B2  |
+| ID  |  A1  |  A2  |  B1  |  B2  |
 +-----+------+------+------+------+
 | 1   | a11  | a12  | b11  | b12  |
 | 2   | a21  | a22  | b21  | b22  |
