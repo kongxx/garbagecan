@@ -1,3 +1,5 @@
+
+``` shell
 mvn archetype:generate                              \
   -DarchetypeGroupId=org.apache.flink               \
   -DarchetypeArtifactId=flink-quickstart-scala      \
@@ -7,5 +9,21 @@ mvn archetype:generate                              \
   -Dversion=0.1                                     \
   -Dpackage=my.flinkstudy                           \
   -DinteractiveMode=false
+```
 
+``` shell
 ${FLINK_HOME}/bin/flink run -c my.flink.quickstart.WordCount target/quickstart-0.1.jar ./
+```
+
+``` shell
+${FLINK_HOME}/bin/flink run -c my.flink.quickstart.BatchJob target/flinkstudy-0.1.jar ./
+```
+
+``` shell
+nc -lk 9001
+
+${FLINK_HOME}/bin/flink run -c my.flinkstudy.StreamingJob target/flinkstudy-0.1.jar 9001
+
+cd ${FLINK_HOME}/log
+tail -f flink-*-taskexecutor-*.out
+```
