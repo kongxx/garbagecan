@@ -12,11 +12,11 @@ mvn archetype:generate                              \
 ```
 
 ``` shell
-${FLINK_HOME}/bin/flink run -c my.flink.quickstart.WordCount target/quickstart-0.1.jar ./
+${FLINK_HOME}/bin/flink run -c my.flinkstudy.WordCount target/flinkstudy-0.1.jar ./
 ```
 
 ``` shell
-${FLINK_HOME}/bin/flink run -c my.flink.quickstart.BatchJob target/flinkstudy-0.1.jar ./
+${FLINK_HOME}/bin/flink run -c my.flinkstudy.BatchJob target/flinkstudy-0.1.jar ./
 ```
 
 ``` shell
