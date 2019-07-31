@@ -65,11 +65,26 @@ test2            14239    /home/admin/ubuntu.simg
 
 ### 操作实例
 
-可以通过 shell 命令来连到容器中运行命令
+可以通过 shell, exec, run 命令来连到容器中运行命令
+
+使用 shell 命令连入容器
 
 ``` shell
 $ singularity shell instance://test1
-...
+Singularity ubuntu.simg:~> ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+admin      1     0  0 03:14 ?        00:00:00 singularity-instance: admin [test1]
+admin      3     0  3 03:14 pts/0    00:00:00 /bin/bash --norc
+admin      4     3  0 03:14 pts/0    00:00:00 ps -ef
+```
+
+使用 exec 执行命令
+
+``` shell
+$ singularity exec instance://test1 ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+admin      1     0  0 03:14 ?        00:00:00 singularity-instance: admin [test1]
+admin      6     0  0 03:15 pts/0    00:00:00 ps -ef
 ```
 
 ### 停止实例
