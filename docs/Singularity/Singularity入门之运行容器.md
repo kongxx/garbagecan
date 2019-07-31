@@ -9,9 +9,9 @@ Singularity Hub
 singularity -d build lolcow.simg shub://GodloveD/lolcow
 
 Docker Hub
-singularity build lolcow.simg docker://godlovedc/lolcow
-singularity -d pull docker://centos
-singularity -d pull docker://ubuntu
+singularity -d build lolcow.simg docker://godlovedc/lolcow
+singularity -d build centos.simg docker://centos
+singularity -d build ubuntu.simg docker://ubuntu
 ```
 
 ## 交互模式运行
