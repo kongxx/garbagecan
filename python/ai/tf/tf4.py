@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
@@ -34,16 +36,13 @@ y[y == 0] = np.random.uniform(0.0001, 0.001)
 print y[:, 3]
 print max(y[:, 3])
 
-# import sys
-# sys.exit(1)
-
-# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-# print x_train.shape, x_test.shape, y_train.shape, y_test.shape
-x_train = x[0:150, :]
-x_test  = x[150:, :]
-y_train = y[0:150, :]
-y_test = y[150:, :]
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 print x_train.shape, x_test.shape, y_train.shape, y_test.shape
+# x_train = x[0:150, :]
+# x_test  = x[150:, :]
+# y_train = y[0:150, :]
+# y_test = y[150:, :]
+# print x_train.shape, x_test.shape, y_train.shape, y_test.shape
 
 xs = tf.placeholder(tf.float32, [None, 3])
 ys = tf.placeholder(tf.float32, [None, 6])
@@ -75,9 +74,10 @@ with tf.Session() as sess:
 
 x_value = np.arange(1, len(y_test) + 1, 1)
 fig = plt.figure()
+titles = [u'阻力', u'升力', u'侧向力', u'滚转力矩', u'偏航力矩', u'俯仰力矩']
 for i in range(1, 7):
     ax = fig.add_subplot(2, 3, i)
     ax.plot(x_value, y_test[:, i - 1:i], label='test value')
     ax.plot(x_value, prediction_value[:, i-1:i], label='prediction value')
-    # ax.set_title('aaa')
+    ax.set_title('test')
 plt.show()
