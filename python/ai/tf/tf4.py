@@ -72,9 +72,9 @@ with tf.Session() as sess:
         print y_test[i]
         print prediction_value[i]
 
+titles = [u'阻力', u'升力', u'侧向力', u'滚转力矩', u'偏航力矩', u'俯仰力矩']
 x_value = np.arange(1, len(y_test) + 1, 1)
 fig = plt.figure()
-titles = [u'阻力', u'升力', u'侧向力', u'滚转力矩', u'偏航力矩', u'俯仰力矩']
 for i in range(1, 7):
     ax = fig.add_subplot(2, 3, i)
     ax.plot(x_value, y_test[:, i - 1:i], label='test value')
