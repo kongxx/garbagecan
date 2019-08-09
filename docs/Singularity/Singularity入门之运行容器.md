@@ -50,14 +50,14 @@ uid=1000(admin) gid=1000(admin) groups=1000(admin),10(wheel)
 ### 启动实例
 
 ``` shell
-$ singularity instance.start ubuntu.simg test1
-$ singularity instance.start ubuntu.simg test2
+$ singularity instance start ubuntu.simg test1
+$ singularity instance start ubuntu.simg test2
 ```
 
 ### 查看实例
 
 ``` shell
-$ singularity instance.list
+$ singularity instance list
 DAEMON NAME      PID      CONTAINER IMAGE
 test1            14172    /home/admin/ubuntu.simg
 test2            14239    /home/admin/ubuntu.simg
@@ -90,8 +90,8 @@ admin      6     0  0 03:15 pts/0    00:00:00 ps -ef
 ### 停止实例
 
 ``` shell
-$ singularity instance.stop test1
-$ singularity instance.stop test1
+$ singularity instance stop test1
+$ singularity instance stop test1
 ```
 
 ## 绑定目录
