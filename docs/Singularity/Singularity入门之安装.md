@@ -12,14 +12,7 @@ $ wget https://github.com/singularityware/singularity/releases/download/$VERSION
 Singularity 提供了几种安装方式，这里选择使用编译 rpm 包的方式来安装。
 
 ``` shell
-$ tar xvf singularity-$VERSION.tar.gz
-$ cd singularity-$VERSION
-$ ./autogen.sh
-$ ./configure
-$ make dist
-
 $ rpmbuild -ta singularity-*.tar.gz
-
 $ ls -al ~/rpmbuild/RPMS/x86_64/
 -rw-rw-r-- 1 admin admin 267796 Jul 30 22:03 singularity-2.5.2-1.el7.x86_64.rpm
 -rw-rw-r-- 1 admin admin 508580 Jul 30 22:03 singularity-debuginfo-2.5.2-1.el7.x86_64.rpm
