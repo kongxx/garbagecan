@@ -55,7 +55,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 也可以使用下面命令来在创建集群的时候制定集群名称。
 
 ``` shell
-$ sudo kind create cluster --name moelove
+$ sudo kind create cluster --name mycluster
 ```
 
 ### 查看集群
