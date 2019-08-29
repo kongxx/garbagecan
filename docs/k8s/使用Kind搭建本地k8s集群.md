@@ -191,3 +191,11 @@ f47d3c836f85        kindest/node:v1.15.3@sha256:27e388752544890482a86b90d8ac50fc
 5feeee745b06        kindest/node:v1.15.3@sha256:27e388752544890482a86b90d8ac50fcfa63a2e8656a96ec5337b902ec8e5157   "/usr/local/bin/en..."   9 minutes ago       Up 9 minutes        36154/tcp, 127.0.0.1:36154->6443/tcp   mycluster-control-plane2
 4213abeebc6f        kindest/haproxy:2.0.0-alpine         
 ```
+
+### 删除集群
+
+``` shell
+$ sudo kind delete cluster --name mycluster
+Deleting cluster "mycluster" ...
+$KUBECONFIG is still set to use /root/.kube/kind-config-mycluster even though that file has been deleted, remember to unset it
+```
