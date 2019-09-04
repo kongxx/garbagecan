@@ -28,13 +28,13 @@ From: ubuntu
 ## 构建镜像
 
 ``` shell
-$ sudo singularity build ubuntu-vim.simg Singularity
+$ sudo singularity build ubuntu-test.simg Singularity
 ```
 
 ## 运行容器
 
 ``` shell
-$ sudo singularity run ubuntu-vim2.simg
+$ sudo singularity run ubuntu-test.simg
 Hello World
 ```
 
