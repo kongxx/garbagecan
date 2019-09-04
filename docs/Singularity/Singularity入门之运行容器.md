@@ -2,21 +2,30 @@
 
 ## 下载已存在镜像
 
-和Docker类似，要运行 Singularity 也需要先获取镜像，Singularity 可以从Singularity Hub 或者 Docker Hub 来获取已存在的镜像。
+和Docker类似，要运行 Singularity 也需要先获取镜像，Singularity 可以从Singularity Hub 或者 Docker Hub 来获取预编译的镜像，或者编译新镜像。
 
 ``` shell
-Singularity Hub
-singularity -d build lolcow.simg shub://GodloveD/lolcow
+# 查询镜像
+$ singularity search ubuntu
 
-Docker Hub
-singularity -d build lolcow.simg docker://godlovedc/lolcow
-singularity -d build centos.simg docker://centos
-singularity -d build ubuntu.simg docker://ubuntu
+# 获取预编译镜像 （会在当前目录下下载 ubuntu_<tag>.sif 文件）
+$ singularity pull ubuntu
+$ singularity pull docker://ubuntu
+
+# 从 Singularity Hub build 镜像
+$ singularity -d build lolcow.simg shub://GodloveD/lolcow
+
+# 从 Docker Hub build 镜像
+$ singularity -d build lolcow.simg docker://godlovedc/lolcow
+$ singularity -d build centos.simg docker://centos
+$ singularity -d build ubuntu.simg docker://ubuntu
 ```
 
 ## 交互模式运行
 
 ``` shell
+$ singularity shell ubuntu_latest.sif
+或
 $ singularity shell ubuntu.simg
 Singularity: Invoking an interactive shell within container...
 
@@ -30,7 +39,9 @@ uid=1000(admin) gid=1000(admin) groups=1000(admin),10(wheel)
 ## 执行一个命令并退出
 
 ``` shell
-$ singularity exec ubuntu.simg bash -c  "pwd && id"
+$ singularity exec ubuntu_latest.sif bash -c "pwd && id"
+或
+$ singularity exec ubuntu.simg bash -c "pwd && id"
 /home/admin
 uid=1000(admin) gid=1000(admin) groups=1000(admin),10(wheel)
 ```
@@ -38,6 +49,8 @@ uid=1000(admin) gid=1000(admin) groups=1000(admin),10(wheel)
 ## 运行一个容器
 
 ``` shell
+$ singularity run ubuntu_latest.sif
+或
 $ singularity run ubuntu.simg
 admin@bdmaster:~$ pwd
 /home/admin
