@@ -8,7 +8,7 @@
 	<name>ignitestudy</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<ignite.version>2.3.0</ignite.version>
+		<ignite.version>2.7.6</ignite.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
