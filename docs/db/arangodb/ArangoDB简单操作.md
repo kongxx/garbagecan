@@ -98,6 +98,17 @@ true
   "_key" : "mykey3", 
   "_rev" : "_Z8uG7vO---" 
 }
+
+127.0.0.1:8529@mydb> db.mycollection.save({ col1: "column1", col2 : "column2", col3: "column3" });
+{ 
+  "_id" : "mycollection/13352", 
+  "_key" : "13352", 
+  "_rev" : "_Z8uuVAG---" 
+}
+
+# 查看一下集合数
+127.0.0.1:8529@mydb> db.mycollection.count();
+4
 ```
 
 ### 查询集合
@@ -105,6 +116,7 @@ true
 ``` shell
 127.0.0.1:8529@mydb> db._query('FOR my IN mycollection RETURN my._key').toArray();
 [ 
+  "13352",
   "mykey1", 
   "mykey2", 
   "mykey3" 
@@ -129,6 +141,14 @@ true
     "_id" : "mycollection/mykey3", 
     "_rev" : "_Z8uG7vO---", 
     "value" : "myvalue3" 
+  } ,
+  { 
+    "_key" : "13352", 
+    "_id" : "mycollection/13352", 
+    "_rev" : "_Z8uuVAG---", 
+    "col1" : "column1", 
+    "col2" : "column2", 
+    "col3" : "column3" 
   } 
 ]
 ```
