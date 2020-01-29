@@ -1,4 +1,4 @@
-# ArangoDB简单操作
+# ArangoDB集合操作
 
 通常我们可以通过 ArangoDB 提供的 Web 接口来对 ArangoDB 进行监控和管理。但今天来看看怎样通过 arangosh 的方式来对数据库进行操作。
 

@@ -1,174 +1,185 @@
-# ArangoDB集合操作
+# ArangoDB简单操作
 
-通过ArangoDB提供的shell终端，我们可以执行很多文档集合操作，下面就看看一些常用的方法。
+通常我们可以通过 ArangoDB 提供的 Web 接口来对 ArangoDB 进行监控和管理。但今天来看看怎样通过 arangosh 的方式来对数据库进行操作。
+
+## 连接数据库
+
+首先通过 arangosh 命令来进入 arangodb 的 shell 终端。
 
 ``` shell
-$ arangosh --server.username root --server.password <password> --server.database mydb
-
-127.0.0.1:8529@mydb> db.users.insert({ name: "user1", age: 10, sex: 1, address: {home: "home address", office: "office address"}});
-127.0.0.1:8529@mydb> db.users.insert({ name: "user2", age: 20, sex: 1, address: {home: "home address", office: "office address"}});
-127.0.0.1:8529@mydb> db.users.insert({ name: "user3", age: 30, sex: 1, address: {home: "home address", office: "office address"}});
-127.0.0.1:8529@mydb> db.users.insert({ name: "user4", age: 40, sex: 0, address: {home: "home address", office: "office address"}});
-127.0.0.1:8529@mydb> db.users.insert({ name: "user5", age: 50, sex: 0, address: {home: "home address", office: "office address"}});
-
-127.0.0.1:8529@mydb> db.users.count();
-5
+$ arangosh
 ```
 
-### all()方法
-all()方法可以返回集合的所有文档对象，我们可以对其使用limit()等函数来限制返回结果。
+进入 shell 终端后，可以通过输入 help 来查看帮助。
+
+ArangoDB 中的数据库操作都是通过 db.xxx 命令来实现的，在 shell 命令提示符下输入 db. 然后按 Tab 键，系统会提示可以使用的函数列表。
+
 ``` shell
-# 返回所有文档
-db.users.all().toArray();
-...
-# 返回前两条结果
-db.users.all().limit(2).toArray();
-...
+# 查看当前有哪些数据库
+127.0.0.1:8529@_system> db._databases();
+[ 
+  "_system"
+]
+
+# 查看当前数据库名
+127.0.0.1:8529@_system> db._name();
+_system
+
+127.0.0.1:8529@_system> db.toString();
+[object ArangoDatabase "_system"]
 ```
 
-### any()方法
-any()方法用来在集合中随机返回一个文档对象。
+上面的操作会登录默认的数据库 "_system"，也可以通过指定数据库名来直接使用指定的数据库，比如：
+
 ``` shell
-# 随机返回一个文档对象
-db.users.any().toArray();
-...
+arangosh --server.username root --server.password <password> --server.database mydb
 ```
 
-### byExample()方法
-byExample()方法用来根据条件查询文档对象。
-``` shell
-# 查询name=user3的对象集合
-127.0.0.1:8529@mydb> db.users.byExample({"name": "user3"}).toArray();
+## 数据库操作
 
-# 查询name=user3并且age=30的对象集合
-127.0.0.1:8529@mydb> db.users.byExample({"name": "user3", "age": 30}).toArray();
+``` shell
+# 创建数据库
+127.0.0.1:8529@_system> db._createDatabase("mydb");
+true
+
+# 查看数据库
+127.0.0.1:8529@_system> db._databases();
+[ 
+  "_system", 
+  "mydb" 
+]
+
+# 切换使用新创建的数据库
+127.0.0.1:8529@_system> db._useDatabase("mydb");
+true
+
+127.0.0.1:8529@mydb> db._name();
+mydb
+
+127.0.0.1:8529@mydb> db._useDatabase("_system");
+true
+
+# 删除数据库
+127.0.0.1:8529@_system> db._dropDatabase("mydb");
+true
 ```
 
-查询结果也可以使用AQL来遍历
+## 集合操作
+
+### 创建集合
+
 ``` shell
-127.0.0.1:8529@mydb> var it = db.users.byExample({"sex" : 1});
-...
-127.0.0.1:8529@mydb> while (it.hasNext()) print(it.next());
-...
+127.0.0.1:8529@mydb> db._create("mycollection");
+[ArangoCollection 10139, "mycollection" (type document, status loaded)]
 ```
 
-### firstExample()方法
-firstExample()方法用来返回查询结果中的第一个文档对象。
+### 写入数据
+
+集合一旦创建好，就可以 db.mycollection. + Tab 来查看可以有哪些对集合的操作了。
+
 ``` shell
-127.0.0.1:8529@mydb> db.users.firstExample("sex", 1);
-...
-```
-
-### document()方法
-document()方法用来根据_id或_key查询文档对象。
-``` shell
-# 按 _id 查询
-127.0.0.1:8529@mydb> db.users.document("users/16771");
-...
-127.0.0.1:8529@mydb> db.users.document({"_id": "users/16771"});
-...
-
-# 按 _key 查询
-127.0.0.1:8529@mydb> db.users.document("16771");
-...
-127.0.0.1:8529@mydb> db.users.document({"_key": "16771"});
-...
-
-# 查询多个文档
-127.0.0.1:8529@mydb> db.users.document(["users/16764", "users/16771"]);
-...
-127.0.0.1:8529@mydb> db.users.document(["16764", "16771"]);
-...
-127.0.0.1:8529@mydb> db.users.documents(["16764", "16771"]);
-...
-```
-
-### exists()方法
-exists()方法用来判断文档是否存在，和document类似，可以按_id或_key来判断。
-``` shell
-127.0.0.1:8529@mydb> db.users.exists("users/16771");
+127.0.0.1:8529@mydb> db.mycollection.save({ _key: "mykey1", value : "myvalue1" });
 { 
-  "_id" : "users/16771", 
-  "_key" : "16771", 
-  "_rev" : "_Z8v3A76---" 
-}
-127.0.0.1:8529@mydb> db.users.exists("16771");
-{ 
-  "_id" : "users/16771", 
-  "_key" : "16771", 
-  "_rev" : "_Z8v3A76---" 
-}
-127.0.0.1:8529@mydb> db.users.exists("12345");
-false
-```
-如果存在返回对象，如果不存在返回false。
-
-### insert()方法
-前面造测试数据的时候已经使用，这里不再多说。
-
-### save()方法
-前面造测试数据的时候已经使用，这里不再多说。
-
-### replace()方法
-replace()方法用来替换已存在的文档对象。
-``` shell
-127.0.0.1:8529@mydb> db.users.replace("users/16782", {name: "user5", age: 50, sex: 0, address: {home: "home address", office: "office address"}});
-{ 
-  "_id" : "users/16782", 
-  "_key" : "16782", 
-  "_rev" : "_Z86X57W--_", 
-  "_oldRev" : "_Z86Xe1u--_" 
+  "_id" : "mycollection/mykey1", 
+  "_key" : "mykey1", 
+  "_rev" : "_Z8uG62W---" 
 }
 
-127.0.0.1:8529@mydb> db.users.replace("16782", {name: "user5", age: 50, sex: 0, address: {home: "home address", office: "office address"}});
+127.0.0.1:8529@mydb> db.mycollection.save({ _key: "mykey2", value : "myvalue2" });
 { 
-  "_id" : "users/16782", 
-  "_key" : "16782", 
-  "_rev" : "_Z86YKTy--_", 
-  "_oldRev" : "_Z86X57W--_" 
-}
-```
-replace()方法也可以执行批量替换操作，语法如下：
-- collection.replace(selectorarray, dataarray)
-- collection.replace(selectorarray, dataarray, options)
-
-### update()方法
-update()方法用来替换文档中的一些属性。
-``` shell
-127.0.0.1:8529@mydb> db.users.update("users/16782", {name: "user5", age: 55});
-{ 
-  "_id" : "users/16782", 
-  "_key" : "16782", 
-  "_rev" : "_Z86e5zy--_", 
-  "_oldRev" : "_Z86ewLW--_" 
+  "_id" : "mycollection/mykey2", 
+  "_key" : "mykey2", 
+  "_rev" : "_Z8uG62e---" 
 }
 
-127.0.0.1:8529@mydb> db.users.update("16782", {address: {home: "new home address"}});
+127.0.0.1:8529@mydb> db.mycollection.save({ _key: "mykey3", value : "myvalue3" });
 { 
-  "_id" : "users/16782", 
-  "_key" : "16782", 
-  "_rev" : "_Z86faPm--_", 
-  "_oldRev" : "_Z86e5zy--_" 
+  "_id" : "mycollection/mykey3", 
+  "_key" : "mykey3", 
+  "_rev" : "_Z8uG7vO---" 
 }
+
+127.0.0.1:8529@mydb> db.mycollection.save({ col1: "column1", col2 : "column2", col3: "column3" });
+{ 
+  "_id" : "mycollection/13352", 
+  "_key" : "13352", 
+  "_rev" : "_Z8uuVAG---" 
+}
+
+# 查看一下集合数
+127.0.0.1:8529@mydb> db.mycollection.count();
+4
 ```
 
-### remove()方法
-remove()方法用来按_id删除文档对象，或者删除一个文档对象。
-``` shell
-# 按 _id 删除
-127.0.0.1:8529@mydb> db.users.remove("users/16782");
+### 查询集合
 
-# 按document删除
-127.0.0.1:8529@mydb> d = db.users.document("users/16782")
-127.0.0.1:8529@mydb> db.users.remove(d);
+``` shell
+127.0.0.1:8529@mydb> db._query('FOR my IN mycollection RETURN my._key').toArray();
+[ 
+  "13352",
+  "mykey1", 
+  "mykey2", 
+  "mykey3" 
+]
+
+127.0.0.1:8529@mydb> db._query('FOR my IN mycollection RETURN my').toArray();
+[ 
+  { 
+    "_key" : "mykey1", 
+    "_id" : "mycollection/mykey1", 
+    "_rev" : "_Z8uG62W---", 
+    "value" : "myvalue1" 
+  }, 
+  { 
+    "_key" : "mykey2", 
+    "_id" : "mycollection/mykey2", 
+    "_rev" : "_Z8uG62e---", 
+    "value" : "myvalue2" 
+  }, 
+  { 
+    "_key" : "mykey3", 
+    "_id" : "mycollection/mykey3", 
+    "_rev" : "_Z8uG7vO---", 
+    "value" : "myvalue3" 
+  } ,
+  { 
+    "_key" : "13352", 
+    "_id" : "mycollection/13352", 
+    "_rev" : "_Z8uuVAG---", 
+    "col1" : "column1", 
+    "col2" : "column2", 
+    "col3" : "column3" 
+  } 
+]
 ```
 
-### removeByKeys()方法
-removeByKeys()方法用来按_key删除文档。
+使用 Filter 过滤查询
+
 ``` shell
-127.0.0.1:8529@mydb> db.users.removeByKeys(["16775", "19465"])
+127.0.0.1:8529@mydb> db._query('FOR my IN mycollection FILTER my._key == "mykey1" RETURN my').toArray();
+[ 
+  { 
+    "_key" : "mykey1", 
+    "_id" : "mycollection/mykey1", 
+    "_rev" : "_Z8uG62W---", 
+    "value" : "myvalue1" 
+  } 
+]
+```
+
+### 删除集合数据
+
+``` shell
+127.0.0.1:8529@mydb> db.mycollection.remove({_key: "mykey1"});
 { 
-  "removed" : 2, 
-  "ignored" : 0 
+  "_id" : "mycollection/mykey1", 
+  "_key" : "mykey1", 
+  "_rev" : "_Z8uU7Eq---" 
 }
+```
+
+### 删除集合
+
+``` shell
+127.0.0.1:8529@mydb> db.mycollection.drop();
 ```
