@@ -1,15 +1,18 @@
 package my.arangodbstudy;
 
 import com.arangodb.ArangoCollection;
+import com.arangodb.ArangoCursor;
 import com.arangodb.ArangoDB;
 import com.arangodb.ArangoDatabase;
 import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.CollectionEntity;
 import com.arangodb.entity.DocumentCreateEntity;
+import com.arangodb.util.MapBuilder;
 
 import java.util.Collection;
+import java.util.Map;
 
-public class SimpleTest {
+public class SimpleAQLTest {
 
 	private static final String DB_HOST = "192.168.31.201";
 	private static final int DB_PORT = 8529;
@@ -38,12 +41,6 @@ public class SimpleTest {
 		// 获取刚才创建的数据库
 		ArangoDatabase db = arangoDB.db(DB_NAME);
 
-		// 迭代打印数据库中的集合
-		Collection<CollectionEntity> collectionEntities = db.getCollections();
-		for (CollectionEntity collectionEntity: collectionEntities) {
-			System.out.println(collectionEntity.getName());
-		}
-
 		// 创建集合
 		CollectionEntity collectionEntity = db.createCollection(COLLECTION_NAME);
 		System.out.println("collection name: " + collectionEntity.getName());
@@ -51,30 +48,28 @@ public class SimpleTest {
 		// 获取创建的集合
 		ArangoCollection collection = db.collection(COLLECTION_NAME);
 
-		// 创建文档对象
-		BaseDocument document = new BaseDocument();
-		document.addAttribute("name", "user");
-		document.addAttribute("age", 10);
-		document.addAttribute("sex", 1);
-
-		// 写入数据
-		DocumentCreateEntity documentCreateEntity = collection.insertDocument(document);
+		// 创建文档对象并写入
+		for (int i = 0; i < 10; i++) {
+			BaseDocument document = new BaseDocument();
+			document.addAttribute("name", "user_" + i);
+			document.addAttribute("age", 10 + i);
+			document.addAttribute("sex", 1);
+			collection.insertDocument(document);
+		}
 		System.out.println("collection count: " + collection.count().getCount());
 
-		// 查询
-		document = collection.getDocument(documentCreateEntity.getKey(), BaseDocument.class);
-		System.out.println("document: " + document);
-
-		// 更新文档
-		document.updateAttribute("sex", 0);
-		collection.updateDocument(documentCreateEntity.getKey(), document);
-		document = collection.getDocument(documentCreateEntity.getKey(), BaseDocument.class);
-		System.out.println("document: " + document);
-
-		// 删除文档
-		collection.deleteDocument(documentCreateEntity.getKey());
-		document = collection.getDocument(documentCreateEntity.getKey(), BaseDocument.class);
-		System.out.println("document: " + document);
+		// 使用AQL查询文档
+		String query = "FOR user IN " + COLLECTION_NAME +
+				" FILTER user.name == @name || user.age >= @age " +
+				" RETURN user";
+		Map<String, Object> params = new MapBuilder()
+				.put("name", "user_0")
+				.put("age", 15)
+				.get();
+		ArangoCursor<BaseDocument> cursor = db.query(query, params, null, BaseDocument.class);
+		cursor.forEachRemaining(document -> {
+			System.out.println("document: " + document);
+		});
 
 		// 删除集合
 		collection.drop();

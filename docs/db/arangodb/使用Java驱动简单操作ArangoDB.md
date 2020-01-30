@@ -39,6 +39,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
 ```
 
@@ -106,7 +119,7 @@ public class SimpleTest {
 
 		// 写入数据
 		DocumentCreateEntity documentCreateEntity = collection.insertDocument(document);
-		System.out.println("collection cound: " + collection.count().getCount());
+		System.out.println("collection count: " + collection.count().getCount());
 
 		// 查询
 		document = collection.getDocument(documentCreateEntity.getKey(), BaseDocument.class);
