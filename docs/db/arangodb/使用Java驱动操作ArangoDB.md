@@ -1,4 +1,4 @@
-# 使用Java驱动简单操作ArangoDB
+# 使用Java驱动操作ArangoDB
 
 前面说过怎样使用 ArangoDB 的 Web，Shell 和 Restful API 来操作数据库，今天看一下怎样使用Java语言来操作ArangoDB数据库。
 
