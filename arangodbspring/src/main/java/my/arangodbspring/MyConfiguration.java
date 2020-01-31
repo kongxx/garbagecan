@@ -8,14 +8,14 @@ import com.arangodb.springframework.config.ArangoConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableArangoRepositories(basePackages = { "my.arangodbspring" })
-public class MyConfiguration extends AbstractArangoConfiguration {
+@EnableArangoRepositories(basePackages = {"my.arangodbspring"})
+public class MyConfiguration extends AbstractArangoConfiguration  {
 
 	@Override
 	public ArangoDB.Builder arango() {
 		ArangoDB.Builder arango = new ArangoDB.Builder()
 				.useProtocol(Protocol.HTTP_JSON)
-				.host("localhost", 8529)
+				.host("106.54.228.237", 8529)
 				.user("root")
 				.password("Letmein");
 		return arango;
