@@ -103,6 +103,25 @@ scrape_configs:
     - targets: ['localhost:9100']
 ```
 
+默认 node_exporter 会收集很多指标，我们也可以在配置文件中设置只收集需要的指标，比如：
+
+``` shell
+...
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+  - job_name: 'node'
+    static_configs:
+    - targets: ['localhost:9100']
+    params:
+      collect[]:
+        - cpu
+        - meminfo
+        - loadavg
+        - netstat
+```
+
 ## 启动Prometheus
 
 修改配置文件后，需要重新启动 Prometheus 服务。服务启动后，在浏览器通过访问 http://localhost:9090 来查看监控信息。
