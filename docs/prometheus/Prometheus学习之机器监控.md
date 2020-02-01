@@ -109,7 +109,7 @@ scrape_configs:
 
 此时，我们可以通过输入 “{instance="localhost:9100",job="node"}” 来过滤只显示新加入的指标。
 
-比如：输入 node_cpu_seconds_total 可以查看节点 CPU 监控指标。
+比如：输入 node_cpu_seconds_total{instance="localhost:9100",job="node"} 可以查看节点 CPU 监控指标。
 
 ``` shell
 Element     Value
