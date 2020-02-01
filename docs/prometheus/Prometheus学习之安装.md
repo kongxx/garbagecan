@@ -1,4 +1,4 @@
-# Prometheus入门之安装
+# Prometheus学习之安装
 
 ##　简介
 
