@@ -15,9 +15,9 @@ public class MyConfiguration extends AbstractArangoConfiguration  {
 	public ArangoDB.Builder arango() {
 		ArangoDB.Builder arango = new ArangoDB.Builder()
 				.useProtocol(Protocol.HTTP_JSON)
-				.host("106.54.228.237", 8529)
+				.host("localhost", 8529)
 				.user("root")
-				.password("Letmein");
+				.password("<password>");
 		return arango;
 	}
 
