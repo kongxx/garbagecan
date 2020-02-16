@@ -141,3 +141,9 @@ node_cpu_seconds_total{cpu="0",instance="localhost:9100",job="node",mode="steal"
 node_cpu_seconds_total{cpu="0",instance="localhost:9100",job="node",mode="system"}  14571.01
 node_cpu_seconds_total{cpu="0",instance="localhost:9100",job="node",mode="user"}    16084.06
 ```
+
+## Console Template
+
+在 Prometheus 我们还可以通过 Console Template 来查看节点监控指标，比如访问 “http://localhost:9090/consoles/index.html.example” 页面来查看。此时可以切换到 Node 标签页查看节点指标。
+
+另外，我们也可以通过修改 {prometheus_path}/consoles/ 目录下的模版文件来定制化自己想要看的指标。
