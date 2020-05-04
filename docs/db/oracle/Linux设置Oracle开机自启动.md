@@ -42,3 +42,7 @@ sudo systemctl enable oracle-rdbms.service
 sudo systemctl start oracle-rdbms.service 
 sudo systemctl stop oracle-rdbms.service 
 ```
+
+---
+使用 /etc/init.d/xxx，参考
+https://docs.oracle.com/en/database/oracle/oracle-database/12.2/unxar/stopping-and-starting-oracle-software.html#GUID-CA969105-B62B-4F5B-B35C-8FB64EC93FAA
