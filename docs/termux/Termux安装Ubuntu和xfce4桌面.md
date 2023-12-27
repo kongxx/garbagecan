@@ -4,9 +4,10 @@
 
 ## 登录 Termux 的 ubuntu 环境
 
-登录到 ubuntu 环境下 （安装方法参考前面的文章）
+安装并登录到 ubuntu 环境下 （安装方法参考前面的文章）
 
 ``` shell
+~ $ proot-distro install ubuntu
 ~ $ proot-distro login ubuntu
 ```
 
