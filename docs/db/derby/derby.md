@@ -15,5 +15,6 @@ derby.user.admin=Letmein
 ```
 
 ``` shell
-ubuntu@VM-4-16-ubuntu:/opt/db-derby-10.14.2.0-bin$ bin/startNetworkServer -h 0.0.0.0 -p 1527
+$ cd /opt/db-derby-10.14.2.0-bin
+$ bin/startNetworkServer -h 0.0.0.0 -p 1527
 ```
