@@ -113,10 +113,10 @@ app.listen(port, () => {
   "name": "myapp",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.ts",
+    "start": "node dist/index.js",
     "dev": "nodemon src/index.ts"
   },
   "author": "",
