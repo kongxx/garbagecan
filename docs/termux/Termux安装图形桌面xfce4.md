@@ -41,7 +41,7 @@ Report issues at https://termux.com/issues
 装完桌面后，考虑到毕竟手机的屏幕比较小，直接从手机上用的可能性比较小，所以打算安装 vnc server，今后从电脑上连上使用，使用下面命令安装 vncserver
 
 ``` shell
-~ $ pkg install tightvnc/x11
+~ $ pkg install tigervnc/x11
 ```
 
 安装完 vnc server 后，先启动一下，这一步会提示设置密码，并且问是否使用 readonly 模式，我这里选择不使用 readonly 模式
