@@ -82,3 +82,11 @@ deb https://packages-cf.termux.dev/apt/termux-main stable main
 deb https://mirrors.ustc.edu.cn/termux/apt/termux-main stable main
 或
 deb https://mirrors.aliyun.com/termux/termux-main stable main
+
+### 访问本地存储
+
+``` shell
+termux-setup-storage
+```
+
+然后可以通过 ～/storage 访问。

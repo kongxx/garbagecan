@@ -18,6 +18,8 @@
 安装 ssh server 软件
 
 ``` shell
+root@localhost:~#  apt update
+root@localhost:~#  apt upgrade
 root@localhost:~#  apt install openssh-server
 ```
 
