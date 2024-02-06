@@ -18,7 +18,7 @@ $ git config core.fileMode false
 也可以在git的全局范围内生效
 
 ``` shell
-git config --global core.filemode false
+$ git config --global core.filemode false
 ```
 
 也可以通过修改 “~/.gitconfig” 文件，在其中添加下面内容 
