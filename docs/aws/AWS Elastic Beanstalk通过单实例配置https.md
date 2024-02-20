@@ -58,27 +58,7 @@ files:
     group: root
     content: |
       -----BEGIN CERTIFICATE-----
-      MIIDyjCCArKgAwIBAgIRAIIG4y+fnTdrBoHvq2ABZT4wDQYJKoZIhvcNAQELBQAw
-      gYUxCzAJBgNVBAYTAkdCMQ8wDQYDVQQHEwZMb25kb24xDzANBgNVBAkTBkxvbmRv
-      bjEwMC4GA1UECxMnSUJNIE1heGltbyBBcHBsaWNhdGlvbiBTdWl0ZSAoSW50ZXJu
-      YWwpMSIwIAYDVQQDExlpbnRlcm5hbC5pODEwLm1hcy5pYm0uY29tMB4XDTIzMDQy
-      NzE2NDAzNloXDTQzMDQyMjE2NDAzNlowIDEeMBwGA1UEAwwVKi5tYXMtaTgxMC1t
-      YW5hZ2Uuc3ZjMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA29Kmx61/
-      Y5w1/osGVyRX2tFdtoV5HoFp77TB0gNlGj9fEM3eFhbSOmZNTcmyrJH/Tzb4Xdtv
-      4a71jUovCCpJFdIgsOPY7NH1WJJlRXzL10JcF6dumW2BbamgSdx/b45eyOwM7Qk1
-      1eomDIterSr6CGH4DpHOOBjxltorzYXwkwFA+3uJK880J8JkxhVExoXTwjK1iudA
-      HkmLaWrADfA/HIlWVpjv5s8n5xoAY4clSOf+OZZuzAYFZxiMUQykRZXv3r77xRz8
-      Z/LBPV+MguTco30b45p5gOOlGY4lhNBtN1PcuNfHhIHsR4hdI70/uHv6IB/VLaWW
-      Nqp4wvIKGXS4hwIDAQABo4GYMIGVMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEF
-      BQcDAjAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFJWW05LV6OCNbS12+TOphzfZ
-      Rr40MEUGA1UdEQQ+MDyCFSoubWFzLWk4MTAtbWFuYWdlLnN2Y4IjKi5tYXMtaTgx
-      MC1tYW5hZ2Uuc3ZjLmNsdXN0ZXIubG9jYWwwDQYJKoZIhvcNAQELBQADggEBAE36
-      XxUxfDDq21CdZi8bidOge4aKbmgg/Blyy+Sgivs4npaq2XJfxHlcrf8EJwWR5wO3
-      ZL93ECi6OYHK3b+xNmkk9+WeQy+gg3tL26WSLOOqy/iCD7lLn1dhcZjd5ecUeCqA
-      zypgeDx82xJmSUEJv9k62PxRzM377Wq2DRKYms/EOE+oPLCsN28+gCjlwEl0QgcF
-      DUghGQT/lMca0qJJG4iqcaQ96HDmqqW9G0rGcgjLFvYz49iT07yMnmT1aSXQL243
-      uGTuU4hht3uCgQdcUygkk0yeMDx6xuViBs5bQwCdlFe4a3WAwPRHjfWckfiddWW4
-      ySizXgbGFMQdJmL6v/A=
+      ...
       -----END CERTIFICATE-----
 
   # Private key
@@ -88,36 +68,11 @@ files:
     group: root
     content: |
       -----BEGIN PRIVATE KEY-----
-      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDb0qbHrX9jnDX+
-      iwZXJFfa0V22hXkegWnvtMHSA2UaP18Qzd4WFtI6Zk1NybKskf9PNvhd22/hrvWN
-      Si8IKkkV0iCw49js0fVYkmVFfMvXQlwXp26ZbYFtqaBJ3H9vjl7I7AztCTXV6iYM
-      i16tKvoIYfgOkc44GPGW2ivNhfCTAUD7e4krzzQnwmTGFUTGhdPCMrWK50AeSYtp
-      asAN8D8ciVZWmO/mzyfnGgBjhyVI5/45lm7MBgVnGIxRDKRFle/evvvFHPxn8sE9
-      X4yC5NyjfRvjmnmA46UZjiWE0G03U9y418eEgexHiF0jvT+4e/ogH9UtpZY2qnjC
-      8goZdLiHAgMBAAECggEAe7gKX/WY7eIcTX/HeMIepCwTt0dVzMJ/cgbk0yNQAr7J
-      7XZAWWRMu8uaFH7Bjfi5ncbNcF2xkW5cC0JGSC0sZxiVh5klHNxqXog+cSZ0v1k8
-      5Z85UybbonHGoet02b9iP2kDOWFmqFeZRJQoHARFJvSknOaZDt+TERkHcCvDI6iU
-      xgOQzE6VXyJzp7FnkDgJYWDbOSctVvM/vzKFeplpScjsvH49Zv4VZTz3j25td9MK
-      oXskL3K0uytOgoaG46vOeZgxLFadfbC3+Pab15tv+uXnB/N+TAHFzOcfxRiDKzA8
-      CT8nOsZ0T6RSb1LriQoiK7uSWk0GQ5QzEXa2eoUP8QKBgQD2e039GwJg55Mai+XF
-      epnBmbM7cTTSRiJ1aCYGqpHAysY5OlNjyVS4iMjcrU4m2e8EdHUTbRbgBfzphdCI
-      G2vmmoQih5sF1oEHBY//lFFzecd3bXAav3EiQjLkdHYVTKNAafz2+TQenbZoE9+i
-      7Y0uAoxmrmp2I02VwJnlnRzzqQKBgQDkT8zjYoPJI/Aq6vBID1BJlsmjjIZOEeS6
-      4xiluZPk9DlD16h8GEpT6qMkjke6r4P9k6VsQojQbbfzrfWls/oI5VlG/lY36u0x
-      s2ViF/6ms7G6feEzptgLfOUGcWZbBzZmnre4XvTVJsd/Vv8Nf+bFzPT6yTiNqzJd
-      ZKajzrHorwKBgQCGSO1XXPSxyNiLGPbI3R+Rq2RLmUSW3uD9KA23igw4hgDywsUV
-      02VV2Cfemoi+f/NJcQ0r1T4mNPzyWRYgYRgrHbmpeknKJ3BKXAx0yOCLUiiK91Oh
-      LvW7HWfOsWh3+DXk7RmFkIWFvJTZJSKtCFDnZToK4zFbRaaKVNFDmJJiaQKBgCNL
-      Hr4r1Xl7f73ysZBCJcQqdiM9LunUpEornvzHclBbXJrbNKVyT9MnG28kO3xlc374
-      mwLgSiwGOgCGbMnfx5AmfCWYXZWpUF91fv+p++ijMJ9GpFCKwy0LcpALaao6tDMq
-      5/WtYCWvJ/nMZgMdOXxsUZaPEpn70/5R99yssB3rAoGBAKIygxn16woSy4eKe/W2
-      +Zcy6N0VcvlCMe2S5LYkbst72i+YbfNOvm2aqjjwRvACE12nW7pFyEc7P77pANog
-      48EVotJh6VQ5UA1wp4WtAj8RiUZ3iEaKnehofKQ0sSBsfH8cY7XPZjQz7dYNcZnS
-      +UOQLugh6UUIxRXcn5crOgvv
+      ...
       -----END PRIVATE KEY-----
 
 Resources:
-  sslSecurityGroupIngress: 
+  sslSecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
       GroupId: {"Fn::GetAtt" : ["AWSEBSecurityGroup", "GroupId"]}
@@ -137,15 +92,15 @@ Resources:
 server {
     listen       443 ssl;
     server_name  localhost;
-    
+
     ssl_certificate      /etc/pki/tls/certs/server.crt;
     ssl_certificate_key  /etc/pki/tls/certs/server.key;
-    
+
     ssl_session_timeout  5m;
-    
+
     ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers   on;
-    
+
     location / {
         proxy_pass              http://localhost;
         proxy_set_header        Connection "";
