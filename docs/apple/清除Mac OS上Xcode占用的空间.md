@@ -10,6 +10,6 @@
    xcrun simctl delete unavailable
    ```
 
-2. 下载的模拟器: ~/Library/Developer/Xcode/iOS DeviceSupport，可根据情况手动删除。
+2. 下载的模拟器: ~/Library/Developer/Xcode/iOS DeviceSupport，可根据情况手动删除其下目录。
 
-3. 旧的应用程序存档: ~/Library/Developer/Xcode/Archives，可根据情况手动删除。
+3. 旧的应用程序存档: ~/Library/Developer/Xcode/Archives，可根据情况手动删除其下目录。
