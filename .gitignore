@@ -6,3 +6,4 @@
 **/.settings
 **/target
 **/*.iml
+**/node_modules
