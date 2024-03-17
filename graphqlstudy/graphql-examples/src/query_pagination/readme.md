@@ -1,4 +1,10 @@
 
+# 
+
+## 列表查询
+
+### 查询操作
+
 ```shell
 query GetUsers($sortBy: SortBy, $sort: SortDirection, $offset: Int, $limit: Int) {
   users(sortBy: $sortBy, sort: $sort, offset: $offset, limit: $limit)  {
@@ -28,6 +34,8 @@ query GetUsers($sortBy: SortBy, $sort: SortDirection, $offset: Int = 0, $limit: 
   "sort": "ASC"
 }
 ```
+
+### 查询结果
 
 ```shell
 {
