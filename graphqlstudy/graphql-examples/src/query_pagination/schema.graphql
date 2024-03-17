@@ -1,0 +1,26 @@
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+enum SortBy {
+  name
+  email
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+type Query {
+  users(
+    sortBy: SortBy = name
+    sort: SortDirection = ASC
+    offset: Int = 0
+    limit: Int = 10
+  ): [User]
+
+  user(id: ID!): User
+}

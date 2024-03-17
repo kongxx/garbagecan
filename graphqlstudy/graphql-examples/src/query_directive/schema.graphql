@@ -1,0 +1,9 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type Query {
+    users(includeName: Boolean, skipId: Boolean): [User],
+}
