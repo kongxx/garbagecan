@@ -1,11 +1,8 @@
-# GraphQL入门之简单查询
+# 
 
-接前面几篇文章
+## 列表查询
 
-GraphQL对数据支持的操作有：
-    查询（Query）： 获取数据的基本查询。
-    变更（Mutation）： 支持对数据的增删改等操作。
-    订阅（Subscription）： 用于监听数据变动、并靠websocket等协议推送变动的消息给对方。
+### 查询请求
 
 ``` shell
 query GetUsers {
@@ -16,6 +13,8 @@ query GetUsers {
   }
 }
 ```
+
+### 查询结果
 
 ``` shell
 {
@@ -41,6 +40,10 @@ query GetUsers {
 }
 ```
 
+## 查询指定用户
+
+### 查询请求
+
 ``` shell
 query FindUser {
   user(id: 1) {
@@ -50,6 +53,8 @@ query FindUser {
   }
 }
 ```
+
+### 查询结果
 
 ``` shell
 {
@@ -63,6 +68,18 @@ query FindUser {
 }
 ```
 
+## curl
 
-
-*/
+``` shell
+curl -X POST http://localhost:4000/ -H "Content-Type: application/json"  -d @- << EOF
+{
+  "query": "query GetUsers {
+    users {
+      id,
+      name,
+      email
+    }
+  }"
+}
+EOF
+```
