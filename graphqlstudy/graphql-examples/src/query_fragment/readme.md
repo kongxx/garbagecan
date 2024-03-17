@@ -1,5 +1,7 @@
 
 
+### 原查询操作
+
 ``` shell
 query ExampleQuery {
   allusers: users {
@@ -14,6 +16,8 @@ query ExampleQuery {
   }
 }
 ```
+
+### 使用 fragment 的查询操作
 
 ``` shell
 fragment userfields on User {
@@ -30,6 +34,8 @@ query ExampleQuery {
   }
 }
 ```
+
+### 查询结果
 
 ``` shell
 {

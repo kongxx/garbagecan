@@ -1,12 +1,22 @@
-# GraphQL入门之查询操作
+# GraphQL入门之查询片段的使用
 
-接前面几篇文章，GraphQL 支持的数据操作有：
+前面的文章介绍了 GraphQL 的查询操作，但是有时候我们要执行类似下面的这种查询操作，在一个查询中包含多个查询操作并且返回的对象结果相同的时候，重复去写这些属性列表也是比较冗余的事情，那么怎么简化这个写法呢？下面就看看怎么通过 fragment 来简化这个写法。
 
-- 查询（Query）： 获取数据的基本查询。
-- 变更（Mutation）： 对数据的增删改等操作。
-- 订阅（Subscription）： 用于监听数据变动并协议推送变动的消息。
-
-今天先看一下怎么执行一个简单的 Query 操作。
+```shell
+query ExampleQuery {
+  allusers: users {
+    id
+    name
+    email
+  }
+  firstuser: user(id: 1) {
+    id
+    name
+    email
+  }
+  。。。
+}
+```
 
 ## 创建 Node.js 的工程
 
@@ -48,7 +58,7 @@ schema 文件主要包括：
 
 创建 resolvers.js 文件，内容如下：
 
-```shell
+``` javascript
 const user1 = {id: 1, name: 'user1', email: 'user1@gmail.com'};
 const user2 = {id: 2, name: 'user2', email: 'user2@gmail.com'};
 const user3 = {id: 3, name: 'user3', email: 'user3@gmail.com'};
@@ -83,7 +93,7 @@ module.exports = resolvers;
 
 创建 server.js 文件，内容如下：
 
-```
+``` javascript
 const { ApolloServer } =  require('@apollo/server');
 const { startStandaloneServer } = require('@apollo/server/standalone');
 const fs = require("fs");
@@ -111,26 +121,36 @@ node server.js
 
 服务启动后，访问 [http://localhost:4000](http://localhost:4000) 进行测试。
 
-### 列表操作
+### 查询操作
 
 查询操作
 
 ```shell
-query GetUsers {
-  users {
-    id,
-    name,
-    email
+fragment userfields on User {
+  id
+  name
+  email
+}
+query ExampleQuery {
+  allusers: users {
+    ... userfields
+  }
+  firstuser: user(id: 1) {
+    ... userfields
   }
 }
 ```
 
-查询结果
+1. 这里定义了一个 fragment，包含了所有需要返回的 User 类型的属性
+
+2. 在所有需要写返回属性的地方，使用 "..." 操作符来引用上面定义的 fragment。
+
+执行结果
 
 ```json
 {
   "data": {
-    "users": [
+    "allusers": [
       {
         "id": "1",
         "name": "user1",
@@ -146,31 +166,8 @@ query GetUsers {
         "name": "user3",
         "email": "user3@gmail.com"
       }
-    ]
-  }
-}
-```
-
-### 查找操作
-
-查询操纵
-
-```shell
-query FindUser {
-  user(id: 1) {
-    id,
-    name,
-    email
-  }
-}
-```
-
-查询结果
-
-```json
-{
-  "data": {
-    "user": {
+    ],
+    "firstuser": {
       "id": "1",
       "name": "user1",
       "email": "user1@gmail.com"
