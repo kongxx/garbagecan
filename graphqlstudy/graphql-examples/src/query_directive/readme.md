@@ -1,4 +1,6 @@
 
+查询请求
+
 ``` shell
 query GetUsers($includeName: Boolean!, $skipId: Boolean!) {
   users(includeName: $includeName, skipId: $skipId) {
@@ -7,14 +9,20 @@ query GetUsers($includeName: Boolean!, $skipId: Boolean!) {
     email
   }
 }
+```
 
+查询参数
+
+``` shell
 {
   "includeName": false,
   "skipId": true
 }
 ```
 
-``` shell
+查询结果
+
+``` json
 {
   "data": {
     "users": [
@@ -31,29 +39,3 @@ query GetUsers($includeName: Boolean!, $skipId: Boolean!) {
   }
 }
 ```
-
-``` shell
-query FindUser {
-  user(id: 1) {
-    id,
-    name,
-    email
-  }
-}
-```
-
-``` shell
-{
-  "data": {
-    "user": {
-      "id": "1",
-      "name": "user1",
-      "email": "user1@gmail.com"
-    }
-  }
-}
-```
-
-
-
-*/
