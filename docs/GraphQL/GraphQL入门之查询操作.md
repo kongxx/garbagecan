@@ -153,7 +153,7 @@ query GetUsers {
 
 ### 查找操作
 
-查询操纵
+查询操作
 
 ```shell
 query FindUser {
