@@ -92,7 +92,7 @@ module.exports = resolvers;
 处理器文件主要包括
 
 1. 准备测试数据：这里创建了一个 User 对象的数据组并初始化了几条数据。
-2. 定义处理函数：users(obj, args, context, info)
+2. 定义处理函数：users(obj, args, context, info)，其中 args 里包含了所有传递过来的参数。
 
 ## 主程序
 
