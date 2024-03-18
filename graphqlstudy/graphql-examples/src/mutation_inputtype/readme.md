@@ -1,3 +1,7 @@
+
+变更请求
+
+``` shell
 mutation createUser($user: UserInput!) {
   createUser(user: $user) {
     id,
@@ -5,14 +9,22 @@ mutation createUser($user: UserInput!) {
     email
   }
 }
+```
 
+变更请求参数
+
+``` shell
 {
   "user": {
     "name": "newuser",
     "email": "newuser@gmail.com"
   }
 }
+```
 
+变更返回结果
+
+``` shell
 {
   "data": {
     "createUser": {
@@ -22,3 +34,4 @@ mutation createUser($user: UserInput!) {
     }
   }
 }
+```

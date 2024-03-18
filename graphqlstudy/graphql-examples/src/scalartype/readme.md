@@ -1,4 +1,6 @@
 
+## 查询操作
+
 ``` shell
 query GetUsers {
   users {
@@ -37,11 +39,9 @@ query GetUsers {
 }
 ```
 
+## 变更操作
 
-
----
-
-
+``` shell
 mutation createUser($name: String!, $email: String!, $registerDateTime: DateTime!) {
   createUser(name: $name, email: $email, registerDateTime: $registerDateTime) {
     id,
@@ -50,13 +50,17 @@ mutation createUser($name: String!, $email: String!, $registerDateTime: DateTime
     registerDateTime
   }
 }
+```
 
+``` shell
 {
   "name": "newuser",
   "email": "newuser@gmail.com",
   "registerDateTime": "2000-01-01T10:10:10"
 }
+```
 
+``` shell
 {
   "data": {
     "createUser": {
@@ -67,3 +71,4 @@ mutation createUser($name: String!, $email: String!, $registerDateTime: DateTime
     }
   }
 }
+```
