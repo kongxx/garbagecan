@@ -10,6 +10,8 @@ type User {
 
 type Query {
     users: [User],
+    
+    user(registerDateTime: DateTime!): User,
 }
 
 type Mutation {
