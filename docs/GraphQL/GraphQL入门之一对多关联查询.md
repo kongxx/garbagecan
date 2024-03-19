@@ -1,7 +1,5 @@
 # GraphQL入门之一对多关联查询
 
-
-
 ## 创建 Node.js 的工程
 
 ```shell
