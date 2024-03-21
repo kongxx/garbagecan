@@ -80,6 +80,28 @@ module.exports = resolvers;
 
 处理器函数有些变化，主要就是 args 里不直接使用 name 和 email 属性，而是通过 args 中的 user 对象来间接使用。
 
+## 主程序
+
+创建 server.js 文件，内容如下：
+
+``` javascript
+const { ApolloServer } =  require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
+const fs = require("fs");
+
+const typeDefs = fs.readFileSync('./schema.graphql').toString();
+const resolvers = require('./resolvers');
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+startStandaloneServer(server).then(function(data) {
+  console.log(`🚀 Server ready at ${data.url}`);
+});
+```
+
 ## 测试
 
 ### 启动服务
