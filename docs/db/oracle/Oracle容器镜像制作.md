@@ -46,12 +46,13 @@
     另起一个终端并仍然使用上面创建的容器来验证
 
     ``` shell
-    sudo docker exec -it oracle12c sqlplus sys/mypassword as sysdba;
+    $ sudo docker exec -it oracle12c sqlplus sys/mypassword as sysdba;
 
     或者
 
-    sudo docker exec -it oracle12c sqlplus system/mypassword;
+    $ sudo docker exec -it oracle12c sqlplus system/mypassword;
+
+    SQL> select * from v$session;
     ```
 
 > 参考：https://github.com/oracle/docker-images
-
