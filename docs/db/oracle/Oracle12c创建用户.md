@@ -4,7 +4,7 @@
 ``` shell
 $ sudo su - oracle
 $ sqlplus /nosql
-SQL> conn sys as sysdba:
+SQL> conn sys as sysdba;
 Enter password: 
 Connected.
 ```

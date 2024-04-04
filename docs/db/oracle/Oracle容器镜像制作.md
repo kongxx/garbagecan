@@ -46,13 +46,11 @@
     另起一个终端并仍然使用上面创建的容器来验证
 
     ``` shell
-    $ sudo docker exec -it oracle12c sqlplus pdbadmin@ORCLPDB1
-    ```
+    sudo docker exec -it oracle12c sqlplus sys/mypassword as sysdba;
 
-    或者另起一个新容器来连接，这样需要先获取前面 oracle 容器的的ip地址
+    或者
 
-    ``` shell
-    $ sudo docker run --rm -ti oracle/database:12.2.0.1-ee sqlplus system/mypassword@//<oracle instance ip>:1521/ORCLCDB
+    sudo docker exec -it oracle12c sqlplus system/mypassword;
     ```
 
 > 参考：https://github.com/oracle/docker-images
