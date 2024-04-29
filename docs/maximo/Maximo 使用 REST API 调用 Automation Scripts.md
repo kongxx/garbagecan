@@ -2,7 +2,11 @@
 
 ## 创建Automation Scripts
 
-首先在 Maximo 的 Automation Scripts 应用中创建一个自动化脚本，命名为 countofwoandsr，内容如下：
+首先在 Maximo 的 Automation Scripts 应用中创建一个自动化脚本，内容如下：
+
+Script: countofwoandsr
+Script Language: javascript
+Allow Invoking Script Functions: true
 
 ``` javascript
 load("nashorn:mozilla_compat.js");
