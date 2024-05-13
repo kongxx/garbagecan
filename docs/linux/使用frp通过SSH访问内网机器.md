@@ -58,7 +58,7 @@ remotePort = 6000
 ./frpc -c frpc.toml
 ```
 
-### 测试
+### 验证
 
 ``` shell
 ssh xx.xx.xx.xx -p 6000
