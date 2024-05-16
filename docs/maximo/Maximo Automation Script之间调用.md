@@ -77,7 +77,7 @@ var responseBody = jsonResp;
 ## 验证
 
 ``` shell
-curl --request GET --url '<base_url>/maximo/api/script/getwos3?apikey=<api_key>&lean=1' --header 'content-type: application/json' --header 'user-agent: vscode-restclient'
+curl --request GET --url '<base_url>/maximo/api/script/test?apikey=<api_key>&lean=1' --header 'content-type: application/json' --header 'user-agent: vscode-restclient'
 ```
 
 ## 参考
