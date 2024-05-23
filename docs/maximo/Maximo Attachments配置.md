@@ -42,11 +42,11 @@ mxe.doclink.path01 = C:\DOCLINKS = http://<host name/ip>
 
 ## 验证
 
-1. 访问 workorder track
+1. 访问 Work Orders -> Work Order Tracking
 
-2. 选择一个workorder，在详细页的 attachments 链接上次附件。
+2. 选择一个workorder，在详细页的 attachments 链接处上传附件。
 
-3. 在详细页的 attachments 链接里打开是新上传的附件。
+3. 在详细页的 attachments 链接里打开新上传的附件。
 
 ## 参考
 
