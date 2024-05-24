@@ -1,4 +1,4 @@
-# Maximo Attachments配置
+# Maximo DOCLINKS配置
 
 以下内容以 Windows 上 Maximo 为例，并假定设置 DOCLINKS 的根路径为 "C:\DOCLINKS"。
 
