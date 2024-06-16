@@ -31,6 +31,8 @@ $ pod spec cat ArcGIS-Runtime-SDK-iOS
 }
 ```
 
+可以看到最低 ios 版本要求是 14.0。
+
 ## 修改 Podfile
 
 - 文件最后添加
