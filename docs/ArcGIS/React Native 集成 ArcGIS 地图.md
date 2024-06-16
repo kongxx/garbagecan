@@ -53,19 +53,19 @@ pod install
 - 在 App.tsx 中使用 react-native-arcgis-mapview 库，完整代码如下
 
 ``` JavaScript
-import React, {useRef, useState}from 'react';
+import React, {useRef, useState}from 'react'
 import {View, Text, Button, StyleSheet } from 'react-native'
 import ArcGISMapView, { setLicenseKey } from 'react-native-arcgis-mapview'
 
 function App(): React.JSX.Element {
 
-  const key = 'AAPK9675225fa5ec47e9af9e9d09c4370e94yvQERZY3NoQGZCDh3absMuwADsEfbTwYQmqQ8FtbhcEJcxyO0a1OsMFk2nWLIE31';
+  const key = '<key>'
   
-  setLicenseKey(key);
+  setLicenseKey(key)
 
-  const mapView = useRef(null);
+  const mapView = useRef(null)
 
-  const basemap = 'https://www.arcgis.com/home/item.html?id=6b6b9cea06964cb38d8a654964c347ab';
+  const basemap = 'https://www.arcgis.com/home/item.html?id=6b6b9cea06964cb38d8a654964c347ab'
 
   return (
     <View style={styles.container}>
@@ -91,7 +91,7 @@ var styles = StyleSheet.create({
   },
 })
 
-export default App;
+export default App
 ```
 
 ## 验证
